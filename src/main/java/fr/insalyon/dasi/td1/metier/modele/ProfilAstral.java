@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -22,6 +23,58 @@ public class ProfilAstral implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    public String getSigneZodiac() {
+        return signeZodiac;
+    }
+
+    public void setSigneZodiac(String signeZodiac) {
+        this.signeZodiac = signeZodiac;
+    }
+
+    public String getSigneAstrologiqueChinois() {
+        return signeAstrologiqueChinois;
+    }
+
+    public void setSigneAstrologiqueChinois(String signeAstrologiqueChinois) {
+        this.signeAstrologiqueChinois = signeAstrologiqueChinois;
+    }
+
+    public String getCouleurPorteBonheur() {
+        return couleurPorteBonheur;
+    }
+
+    public void setCouleurPorteBonheur(String couleurPorteBonheur) {
+        this.couleurPorteBonheur = couleurPorteBonheur;
+    }
+
+    public String getAnimalTotem() {
+        return animalTotem;
+    }
+
+    public void setAnimalTotem(String animalTotem) {
+        this.animalTotem = animalTotem;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+    
+    
+    private String signeZodiac;
+
+    private String signeAstrologiqueChinois;
+    
+    private String couleurPorteBonheur;
+    
+    private String animalTotem;
+    
+    @OneToOne(mappedBy="profilAstral")
+    private Client client;
 
     public Long getId() {
         return id;

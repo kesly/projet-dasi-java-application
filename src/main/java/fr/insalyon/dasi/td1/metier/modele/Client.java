@@ -6,11 +6,15 @@
 package fr.insalyon.dasi.td1.metier.modele;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -27,11 +31,25 @@ public class Client implements Serializable {
     private String nom;
 
     private String prenom;
+    
+    private Date dateNaissance;
 
-    @Column(nullable = true, unique = true)
+    private String adressePostal;
+    
+    private String tel;
+    
+    private String civilite;
+    
+    @Column(nullable = false, unique = true)
     private String mail;
 
     private String motDePasse;
+    
+    @OneToOne(mappedBy="client")
+    private ProfilAstral profilAstral;
+    
+    @OneToMany(mappedBy="client")
+    private List<Consultation> consultations;
 
     public Client(){
 

@@ -102,7 +102,7 @@ public class Service {
         return client;
     }
     
-    public Client inscriptionClient(Client client)
+    public void inscriptionClient(Client client)
     {
         ClientDao clientDao = new ClientDao();
         
@@ -111,15 +111,16 @@ public class Service {
             JpaUtil.ouvrirTransaction();
             clientDao.create(client);
             JpaUtil.validerTransaction();
-            Logger.getAnonymousLogger().log(Level.INFO, "Succès inscription : " + client.toString());
+            Logger.getAnonymousLogger().log(Level.INFO, "Mail inscription envoyé: " + client.toString());
+            
         } catch(Exception exception)
         {
-            Logger.getAnonymousLogger().log(Level.SEVERE, "Error during authenticate " + exception);
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Error during inscription " + exception);
+            
         } finally {
             JpaUtil.fermerContextePersistance();
         }
         
-        return client;
     }
     
 }

@@ -6,10 +6,12 @@
 package fr.insalyon.dasi.td1.metier.modele;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -22,6 +24,18 @@ public class Consultation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    
+    private Date dateHeureDemande;
+
+    private String commentaire;
+    
+    private Date dateHeureDebut;
+    
+    private Date dateHeureFin;
+    
+    @ManyToOne
+    private Client client;
 
     public Long getId() {
         return id;
