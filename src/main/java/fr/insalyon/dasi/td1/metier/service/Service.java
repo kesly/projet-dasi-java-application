@@ -102,4 +102,24 @@ public class Service {
         return client;
     }
     
+    public Client inscriptionClient(Client client)
+    {
+        ClientDao clientDao = new ClientDao();
+        
+        try {
+            JpaUtil.creerContextePersistance();
+            JpaUtil.ouvrirTransaction();
+            clientDao.create(client);
+            JpaUtil.validerTransaction();
+            Logger.getAnonymousLogger().log(Level.INFO, "Succès inscription : " + client.toString());
+        } catch(Exception exception)
+        {
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Error during authenticate " + exception);
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        
+        return client;
+    }
+    
 }
