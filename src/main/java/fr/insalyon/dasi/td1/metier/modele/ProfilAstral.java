@@ -55,14 +55,6 @@ public class ProfilAstral implements Serializable {
     public void setAnimalTotem(String animalTotem) {
         this.animalTotem = animalTotem;
     }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
     
     
     private String signeZodiac;
@@ -73,8 +65,6 @@ public class ProfilAstral implements Serializable {
     
     private String animalTotem;
     
-    @OneToOne(mappedBy="profilAstral")
-    private Client client;
 
     public Long getId() {
         return id;

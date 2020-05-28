@@ -2,6 +2,10 @@ fr/insalyon/dasi/td1/metier/modele/Client_.class
 fr/insalyon/dasi/td1/metier/modele/Client.class
 fr/insalyon/dasi/td1/metier/service/Service.class
 fr/insalyon/dasi/td1/dao/JpaUtil$1.class
+fr/insalyon/dasi/td1/metier/modele/Consultation_.class
 fr/insalyon/dasi/td1/vue/Main.class
+fr/insalyon/dasi/td1/metier/modele/ProfilAstral.class
 fr/insalyon/dasi/td1/dao/ClientDao.class
+fr/insalyon/dasi/td1/metier/modele/ProfilAstral_.class
 fr/insalyon/dasi/td1/dao/JpaUtil.class
+fr/insalyon/dasi/td1/metier/modele/Consultation.class

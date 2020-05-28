@@ -15,6 +15,8 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -32,6 +34,7 @@ public class Client implements Serializable {
 
     private String prenom;
     
+    @Temporal(TemporalType.DATE)
     private Date dateNaissance;
 
     private String adressePostal;
@@ -45,7 +48,7 @@ public class Client implements Serializable {
 
     private String motDePasse;
     
-    @OneToOne(mappedBy="client")
+    @OneToOne
     private ProfilAstral profilAstral;
     
     @OneToMany(mappedBy="client")
