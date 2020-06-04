@@ -6,8 +6,11 @@
 package fr.insalyon.dasi.td1.metier.modele;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -55,7 +58,7 @@ public class Client implements Serializable {
     private List<Consultation> consultations;
 
     public Client(){
-
+        this.consultations = new ArrayList<Consultation>();
 
     }
 
@@ -66,6 +69,8 @@ public class Client implements Serializable {
         this.prenom = prenom;
         this.mail = mail;
         this.motDePasse = motDePasse;
+        
+        this.consultations = new ArrayList<Consultation>();
     }
 
     public String getNom()
@@ -116,6 +121,19 @@ public class Client implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    
+    public void addConsultation(Consultation consultation)
+    {
+         Logger.getAnonymousLogger().log(Level.INFO, "consul " + consultation.toString());
+        
+        if (!this.consultations.contains(consultation)) {
+            this.consultations.add(consultation);
+            consultation.setClient(this);
+        }
+    }
+    
+    
 
     @Override
     public int hashCode() {

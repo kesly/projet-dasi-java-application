@@ -5,9 +5,9 @@
  */
 package fr.insalyon.dasi.td1.dao;
 import fr.insalyon.dasi.td1.metier.modele.Client;
-import fr.insalyon.dasi.td1.dao.JpaUtil;
 import javax.persistence.Query;
 import java.util.List;
+import javax.persistence.TypedQuery;
 
 
 /**
@@ -26,15 +26,15 @@ public class ClientDao {
     
     public List<Client> findAll(){
         String s = "SELECT c FROM Client c ORDER BY c.nom ASC";
-        Query query = JpaUtil.obtenirContextePersistance().createQuery(s);
-        return (List<Client>)query.getResultList();
+        TypedQuery<Client> query = JpaUtil.obtenirContextePersistance().createQuery(s, Client.class);
+        return query.getResultList();
     }
     
     public Client authenticate(String mail, String motDePasse)
     {
         String s = "SELECT c FROM Client c WHERE c.mail = :mail and c.motDePasse = :mdp";
         Query query = JpaUtil.obtenirContextePersistance().createQuery(s);
-        query.setParameter("mail", mail);
+//        query.setParameter("mail", mail);
         query.setParameter("mdp", motDePasse);
         return (Client) query.getSingleResult();
     }
