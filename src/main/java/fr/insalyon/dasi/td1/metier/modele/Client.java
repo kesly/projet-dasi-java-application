@@ -5,9 +5,12 @@
  */
 package fr.insalyon.dasi.td1.metier.modele;
 
+import fr.insalyon.dasi.td1.dao.JpaUtil;
+import static fr.insalyon.dasi.td1.metier.modele.Consultation_.client;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -48,8 +51,10 @@ public class Client implements Serializable {
 
     private String motDePasse;
     
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private ProfilAstral profilAstral;
+
+    
     
     @OneToMany(mappedBy="client")
     private List<Consultation> consultations;
@@ -58,12 +63,18 @@ public class Client implements Serializable {
 
 
     }
+    
+    public ProfilAstral getProfilAstral() {
+        return profilAstral;
+    }
 
+    public void setProfilAstral(ProfilAstral profilAstral) {
+        this.profilAstral = profilAstral;
+    }
 
-     public Client(String nom, String prenom, String mail, String motDePasse)
-    {
-        this.nom = nom;
+    public Client(String prenom, String nom, String mail, String motDePasse) {
         this.prenom = prenom;
+        this.nom = nom;
         this.mail = mail;
         this.motDePasse = motDePasse;
     }
@@ -88,6 +99,14 @@ public class Client implements Serializable {
         this.prenom = prenom;
     }
 
+    public Date getDateNaissance() {
+        return dateNaissance;
+    }
+
+    public void setDateNaissance(Date dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+    
     public String getMail()
     {
         return this.mail;

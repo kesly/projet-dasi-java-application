@@ -19,13 +19,20 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import fr.insalyon.dasi.td1.dao.JpaUtil;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
 
 public class Main {
+    
+    private static Logger logger = Logger.getAnonymousLogger();
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException, ParseException {
+        logger.info("Succès authentification");
         System.out.print("Hello World");
         JpaUtil.init();
         
@@ -33,27 +40,32 @@ public class Main {
         testerInscriptionClient(); // question 4 et 5 
         //testerRechercheClient(); // question 6
         //testerListeClient(); question 7
-        testerAuthentificationClient(); // question 8
-        
+//        testerAuthentificationClient(); // question 8
+//        testerGetAstralProfile();
         
         JpaUtil.destroy();
     }
 
 
     
-    public static void testerInscriptionClient(){
+    public static void testerInscriptionClient() throws IOException, ParseException{
         
         
         Client c1 = new Client("Kesly", "Gassant", "kekes@gmail.com", "password");
         Client c2 = new Client("test", "test", "kekes@gmail.com", "password2");
-        Service service = new Service();
-        service.recruter(c1);
-        //service.recruter(c2);
-
-               
-        Logger.getAnonymousLogger().log(Level.INFO, "Succès inscription");        
-        Logger.getAnonymousLogger().log(Level.INFO, ""+ c1);
+        Client c3 = new Client("Niels", "de Barbanson", "nielsdebarbanson@gmail.com", "mot2passe");
         
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String date = "22/06/2006";
+        
+        c1.setDateNaissance(simpleDateFormat.parse("25/11/1999"));
+        c2.setDateNaissance(simpleDateFormat.parse("20/01/2000"));
+        c3.setDateNaissance(simpleDateFormat.parse("13/09/1997"));
+
+        Service service = new Service();
+        service.inscriptionClient(c1);
+        service.inscriptionClient(c2);
+        service.inscriptionClient(c3);
     }
     
     public static void testerRechercheClient(){
@@ -61,31 +73,35 @@ public class Main {
         Service service = new Service();
         Client c = service.findClientById(new Long(1));
                
-        Logger.getAnonymousLogger().log(Level.INFO, "Succès recherche");        
-        Logger.getAnonymousLogger().log(Level.INFO, ""+ c);
+        logger.info("Succès recherche");        
+        logger.info(""+ c);
         
     }
     
     public static void testerListeClient(){
-         
+
         Service service = new Service();
-        List<Client> listClient= service.findAllClient();
-               
-        Logger.getAnonymousLogger().log(Level.INFO, "Succès lister");        
-        Logger.getAnonymousLogger().log(Level.INFO, ""+ listClient.toString());
-        
+        List<Client> listClient = service.findAllClient();
+
+        logger.info("Succès lister");
+        logger.info("" + listClient.toString());
+
     }
-    
-        public static void testerAuthentificationClient(){
-         
+
+    public static void testerAuthentificationClient() {
+
         Service service = new Service();
         Client c = service.getClientByAuthentication("kekes@gmail.com", "password");
-       
-               
-        Logger.getAnonymousLogger().log(Level.INFO, "Succès authentification");        
-        Logger.getAnonymousLogger().log(Level.INFO, ""+ c.toString());
-        
+
+        logger.info("Succès authentification");
+        logger.info("" + c.toString());
+
     }
+    
+    
+    
+        
+        
     
     
     public static void  initialiserClients(){
@@ -110,11 +126,11 @@ public class Main {
 
             tx.commit();
 
-            Logger.getAnonymousLogger().log(Level.INFO, "succès création Client : " + kesly);
+            logger.info("succès création Client : " + kesly);
 
         }catch(Exception ex){
 
-            Logger.getAnonymousLogger().log(Level.INFO, "echec création Client : " + ex );
+            logger.info("echec création Client : " + ex );
 
             if(tx != null && tx.isActive()){
                 tx.rollback();
