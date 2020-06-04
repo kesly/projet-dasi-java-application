@@ -22,6 +22,7 @@ import fr.insalyon.dasi.td1.dao.JpaUtil;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import fr.insalyon.dasi.td1.metier.modele.Consultation;
 import java.util.Date;
 import java.util.List;
 
@@ -40,8 +41,10 @@ public class Main {
         testerInscriptionClient(); // question 4 et 5 
         //testerRechercheClient(); // question 6
         //testerListeClient(); question 7
-//        testerAuthentificationClient(); // question 8
-//        testerGetAstralProfile();
+        //testerAuthentificationClient(); // question 8
+        
+        testerListeConsultationParClient();
+        
         
         JpaUtil.destroy();
     }
@@ -52,6 +55,29 @@ public class Main {
         
         
         Client c1 = new Client("Kesly", "Gassant", "kekes@gmail.com", "password");
+        //Client c2 = new Client("test", "test", "kekes@gmail.com", "password2");
+        Service service = new Service();
+        
+        
+       Consultation consultation = new Consultation();
+       consultation.setDateHeureDemande(new Date());
+       consultation.setDateHeureDebut(null);
+       consultation.setDateHeureFin(null);
+       consultation.setCommentaire("test commenbtaire");
+
+       
+       c1.addConsultation(consultation);
+       
+       
+        
+        service.inscriptionClient(c1);
+        service.createConsultation(consultation);
+        //service.recruter(c2);
+        
+
+               
+        Logger.getAnonymousLogger().log(Level.INFO, "Succès inscription");        
+        Logger.getAnonymousLogger().log(Level.INFO, ""+ c1);
         Client c2 = new Client("test", "test", "kekes@gmail.com", "password2");
         Client c3 = new Client("Niels", "de Barbanson", "nielsdebarbanson@gmail.com", "mot2passe");
         
@@ -66,6 +92,30 @@ public class Main {
         service.inscriptionClient(c1);
         service.inscriptionClient(c2);
         service.inscriptionClient(c3);
+    }
+    
+    public static void ajoutConsultationPourClient(){
+        
+        // recuperer client
+        
+        Service service = new Service();
+        
+        
+        
+        // ajouter consultation
+        
+    }
+    
+    
+    public static void testerListeConsultationParClient(){
+         
+        Service service = new Service();
+        
+        List<Consultation> listConsultation= service.findAllConsultationByClient(service.findClientById(new Long(1)));
+               
+        Logger.getAnonymousLogger().log(Level.INFO, "Succès lister");        
+        Logger.getAnonymousLogger().log(Level.INFO, ""+ listConsultation.toString());
+        
     }
     
     public static void testerRechercheClient(){

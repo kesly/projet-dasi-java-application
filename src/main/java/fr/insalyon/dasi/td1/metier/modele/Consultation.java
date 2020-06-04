@@ -26,6 +26,46 @@ public class Consultation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    public Date getDateHeureDemande() {
+        return dateHeureDemande;
+    }
+
+    public void setDateHeureDemande(Date dateHeureDemande) {
+        this.dateHeureDemande = dateHeureDemande;
+    }
+
+    public String getCommentaire() {
+        return commentaire;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
+
+    public Date getDateHeureDebut() {
+        return dateHeureDebut;
+    }
+
+    public void setDateHeureDebut(Date dateHeureDebut) {
+        this.dateHeureDebut = dateHeureDebut;
+    }
+
+    public Date getDateHeureFin() {
+        return dateHeureFin;
+    }
+
+    public void setDateHeureFin(Date dateHeureFin) {
+        this.dateHeureFin = dateHeureFin;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
     
     @Temporal(TemporalType.TIME)
     private Date dateHeureDemande;
@@ -71,7 +111,7 @@ public class Consultation implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.insalyon.dasi.td1.metier.modele.Consultation[ id=" + id + " ]";
+        return "fr.insalyon.dasi.td1.metier.modele.Consultation[ id=" + id +  "commentaire = "+commentaire+  " ]";
     }
     
 }

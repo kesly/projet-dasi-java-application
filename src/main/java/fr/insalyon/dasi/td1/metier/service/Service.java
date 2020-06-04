@@ -6,12 +6,14 @@
 package fr.insalyon.dasi.td1.metier.service;
 
 import fr.insalyon.dasi.td1.metier.modele.Client;
+import fr.insalyon.dasi.td1.metier.modele.Consultation;
 import fr.insalyon.dasi.td1.dao.JpaUtil;
 import fr.insalyon.dasi.td1.dao.ClientDao;
 import fr.insalyon.dasi.td1.metier.modele.ProfilAstral;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import fr.insalyon.dasi.td1.dao.ConsultationDao;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.List;
@@ -146,7 +148,46 @@ public class Service {
     }
     
     
+    public List<Consultation> findAllConsultationByClient(Client client){
+        
+        ConsultationDao consultationDao = new ConsultationDao();
+        List<Consultation> consultations = null;
+        
+        try {
+            JpaUtil.creerContextePersistance();
             
+            consultations = consultationDao.findAllByClientId(client.getId());
+        } catch(Exception exception)
+        {
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Error during findAllConsultationByClient " + exception);
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        
+        return consultations;
+        
+    }
+    
+    
+    public void createConsultation(Consultation consultation){
+        
+        ConsultationDao consultationDao = new ConsultationDao();
+        
+        try {
+            JpaUtil.creerContextePersistance();
+            JpaUtil.ouvrirTransaction();
+            consultationDao.create(consultation);
+            JpaUtil.validerTransaction();
+            Logger.getAnonymousLogger().log(Level.INFO, "Success: createConsultation " + consultation.toString());
             
+        } catch(Exception exception)
+        {
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Error during createConsultation " + exception);
             
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        
+    }
+    
 }
