@@ -10,6 +10,10 @@ import fr.insalyon.dasi.td1.metier.modele.Consultation;
 import fr.insalyon.dasi.td1.dao.JpaUtil;
 import fr.insalyon.dasi.td1.dao.ClientDao;
 import fr.insalyon.dasi.td1.dao.ConsultationDao;
+import fr.insalyon.dasi.td1.dao.MediumDao;
+import static fr.insalyon.dasi.td1.metier.modele.Client_.id;
+import fr.insalyon.dasi.td1.metier.modele.Medium;
+import java.util.Date;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.List;
@@ -145,5 +149,119 @@ public class Service {
         }
         
     }
+    
+    
+    
+    
+    
+    
+    public Medium findMediumById(Long id){
+        MediumDao mediumDao = new MediumDao();
+        
+        Medium medium = null;
+        try {
+            JpaUtil.creerContextePersistance();
+            
+            medium = mediumDao.findById(id);
+            
+            Logger.getAnonymousLogger().log(Level.INFO, "Succès: medium trouve par id" + medium.toString());
+            
+        } catch(Exception exception)
+        {
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Erreur: impossible de trouver le medium ayant l'id" + id.toString());
+        } finally {
+            JpaUtil.fermerContextePersistance();    
+        }
+        
+        return medium;
+        
+    }
+    
+   
+        public List<Medium> findAllMedium(){
+        MediumDao mediumDao = new MediumDao();
+        
+        List<Medium> mediums = null;
+        try {
+            JpaUtil.creerContextePersistance();
+            
+            mediums = mediumDao.findAll();
+            
+            Logger.getAnonymousLogger().log(Level.INFO, "Succès " + mediums.toString() );
+            
+        } catch(Exception exception)
+        {
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Erreur dans findAllMedium", exception);
+        } finally {
+            JpaUtil.fermerContextePersistance();    
+        }
+        
+        return mediums;
+        
+    }
+    
+    
+    
+    
+    public Consultation findConsultationById(Long id){
+            
+        ConsultationDao consultationDao = new ConsultationDao();
+        
+        Consultation consultation = null;
+        try {
+            JpaUtil.creerContextePersistance();
+            
+            consultation = consultationDao.findById(id);
+            
+            Logger.getAnonymousLogger().log(Level.INFO, "Succès: consultation trouve par id" + consultation.toString());
+            
+        } catch(Exception exception)
+        {
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Erreur: impossible de trouver le consultation ayant l'id" + id.toString());
+        } finally {
+            JpaUtil.fermerContextePersistance();    
+        }
+        
+        return consultation;
+        
+    }
+    
+    
+        public Consultation demandeConsultation(Client client,  Medium medium){
+            
+        ConsultationDao consultationDao = new ConsultationDao();
+        
+        Consultation consultation = null;
+        try {
+            JpaUtil.creerContextePersistance();
+            
+            // create consultation
+            
+            consultation = new Consultation();
+            consultation.setDateHeureDemande(new Date());
+            consultation.setDateHeureDebut(null);
+            consultation.setDateHeureFin(null);
+            consultation.setCommentaire(null);
+            
+            consultationDao.create(consultation);
+            
+            client.addConsultation(consultation);
+            
+            Logger.getAnonymousLogger().log(Level.INFO, "Succès: consultation trouve par id" + consultation.toString());
+            
+        } catch(Exception exception)
+        {
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Erreur: impossible de faire la demande de consultation ayant l'id" + id.toString());
+        } finally {
+            JpaUtil.fermerContextePersistance();    
+        }
+        
+        return consultation;
+        
+    }
+    
+    
+    
+    
     
 }

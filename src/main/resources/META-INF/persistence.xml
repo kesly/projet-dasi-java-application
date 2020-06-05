@@ -5,6 +5,7 @@
     <class>fr.insalyon.dasi.td1.metier.modele.Client</class>
     <class>fr.insalyon.dasi.td1.metier.modele.ProfilAstral</class>
     <class>fr.insalyon.dasi.td1.metier.modele.Consultation</class>
+    <class>fr.insalyon.dasi.td1.metier.modele.Medium</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/dasi-ifa"/>
       <property name="javax.persistence.jdbc.user" value="dasi"/>

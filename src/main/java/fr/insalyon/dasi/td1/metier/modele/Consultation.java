@@ -27,6 +27,28 @@ public class Consultation implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Temporal(TemporalType.TIME)
+    private Date dateHeureDemande;
+
+    private String commentaire;
+    
+    @Temporal(TemporalType.TIME)
+    private Date dateHeureDebut;
+    
+    @Temporal(TemporalType.TIME)
+    private Date dateHeureFin;
+    
+    @ManyToOne
+    private Client client;
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public Date getDateHeureDemande() {
         return dateHeureDemande;
     }
@@ -67,28 +89,6 @@ public class Consultation implements Serializable {
         this.client = client;
     }
     
-    @Temporal(TemporalType.TIME)
-    private Date dateHeureDemande;
-
-    private String commentaire;
-    
-    @Temporal(TemporalType.TIME)
-    private Date dateHeureDebut;
-    
-    @Temporal(TemporalType.TIME)
-    private Date dateHeureFin;
-    
-    @ManyToOne
-    private Client client;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
