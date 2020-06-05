@@ -45,9 +45,10 @@ public class Main {
         testerInscriptionClient();
         testerObtenirPredictions();
         testerCreationMedium();
-        //testerDemandeConsultation();
+        testerDemandeConsultation();
         testerDemarrerConsultation();
         testerTerminerConsultation();
+        testerConsulterHistorique();
 
         //testerRechercheClient(); // question 6
         //testerListeClient(); question 7
@@ -238,21 +239,38 @@ public class Main {
     }
 
     public static void testerDemarrerConsultation(){
-
-        Consultation consultation = new Consultation();
         Service service = new Service();
+        Consultation consultation = service.findConsultationById(8L);
         // @TODO: ajouter un employé à la consult
         Client c1 = service.findClientById(1L);
         c1.addConsultation(consultation);
         service.demarrerConsultation(consultation);
     }
     
-    public static void testerTerminerConsultation(){
+    public static void testerTerminerConsultation() {
 
         Service service = new Service();
         Consultation consultation = service.findConsultationById(8L);
         service.terminerConsultation(consultation);
     }
 
+    public static void testerConsulterHistorique() {
+        Service service = new Service();
+        Client c1 = service.findClientById(1L);
+        List<Consultation> historique;
+        historique = service.consulterHistorique(c1);
+
+        System.out.println("Historique des consultations de " + c1.getPrenom() + " : \n");
+
+        int index = 0;
+        for (Consultation consult : historique) {
+            System.out.println("Consultation numéro : " + (index++) + "\n");
+            // @TODO: ajouter médium
+//            System.out.println("Avec le médium: " + consult.getMedium().toString() + "\n");
+            System.out.println("de  : " + consult.getDateHeureDebut().toString() + "\n");
+            System.out.println("à : " + consult.getDateHeureFin().toString() + "\n");
+            System.out.println("Comementaire : " + consult.getCommentaire() + "\n");
+        }
+    }
 
 }
