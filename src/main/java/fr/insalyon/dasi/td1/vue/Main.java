@@ -44,8 +44,9 @@ public class Main {
         //initialiserClients();// question 3
         testerInscriptionClient();
         testerObtenirPredictions();
-        //testerCreationMedium();
+        testerCreationMedium();
         //testerDemandeConsultation();
+        testerDemarrerConsultation();
 
         //testerRechercheClient(); // question 6
         //testerListeClient(); question 7
@@ -227,6 +228,15 @@ public class Main {
 
         }
 
+    }
+    
+    public static void testerDemarrerConsultation(){
+        
+        Consultation consultation = new Consultation();
+        Service service = new Service();
+        Client c1 = service.findClientById(1L);
+        c1.addConsultation(consultation);
+        service.demarrerConsultation(consultation);
     }
 
 

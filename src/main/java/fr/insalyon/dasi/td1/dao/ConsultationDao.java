@@ -20,6 +20,10 @@ public class ConsultationDao {
         JpaUtil.obtenirContextePersistance().persist(consultation);
     }
     
+    public void update(Consultation consultation){
+        JpaUtil.obtenirContextePersistance().merge(consultation);
+    }
+    
     public Consultation findById(Long id){
         return JpaUtil.obtenirContextePersistance().find(Consultation.class, id);
     }
