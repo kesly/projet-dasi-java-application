@@ -6,13 +6,12 @@
 package fr.insalyon.dasi.td1.metier.modele;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.*;
 
 /**
- *
  * @author keslygassant
  */
 @Entity
@@ -22,15 +21,64 @@ public class Medium implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    
-    
+
+    public String getDenomination() {
+        return denomination;
+    }
+
+    public void setDenomination(String denomination) {
+        this.denomination = denomination;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public Medium() {
+    }
+
+    public Medium(String denomination, String genre, String presentation) {
+        this.denomination = denomination;
+        this.genre = genre;
+        this.presentation = presentation;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getPresentation() {
+        return presentation;
+    }
+
+    public void setPresentation(String presentation) {
+        this.presentation = presentation;
+    }
+
     private String denomination;
-     
+
     private String genre;
-    
+
     private String presentation;
-            
+
+    @OneToMany(mappedBy = "medium")
+    private List<Consultation> consultations;
+
+    public List<Consultation> getConsultations() {
+        return consultations;
+    }
+
+    public void setConsultations(List<Consultation> consultations) {
+        this.consultations = consultations;
+    }
+
+    public void addConsultation(Consultation consultation) {
+        Logger.getAnonymousLogger().log(Level.INFO, "consul " + consultation.toString());
+
+        if (!this.consultations.contains(consultation)) {
+            this.consultations.add(consultation);
+        }
+    }
 
     public Long getId() {
         return id;
@@ -64,5 +112,5 @@ public class Medium implements Serializable {
     public String toString() {
         return "fr.insalyon.dasi.td1.metier.modele.Medium[ id=" + id + " ]";
     }
-    
+
 }

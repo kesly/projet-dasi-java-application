@@ -15,8 +15,11 @@ import javax.persistence.TypedQuery;
  * @author keslygassant
  */
 public class MediumDao {
-    
-    
+
+    public void create(Medium medium){
+        JpaUtil.obtenirContextePersistance().persist(medium);
+    }
+
     public Medium findById(Long id){
         return JpaUtil.obtenirContextePersistance().find(Medium.class, id);
     }

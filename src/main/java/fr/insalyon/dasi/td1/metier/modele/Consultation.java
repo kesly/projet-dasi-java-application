@@ -16,7 +16,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- *
  * @author keslygassant
  */
 @Entity
@@ -31,16 +30,27 @@ public class Consultation implements Serializable {
     private Date dateHeureDemande;
 
     private String commentaire;
-    
+
     @Temporal(TemporalType.TIME)
     private Date dateHeureDebut;
-    
+
     @Temporal(TemporalType.TIME)
     private Date dateHeureFin;
-    
+
     @ManyToOne
     private Client client;
-    
+
+    @ManyToOne
+    private Medium medium;
+
+    public Medium getMedium() {
+        return medium;
+    }
+
+    public void setMedium(Medium medium) {
+        this.medium = medium;
+    }
+
     public Long getId() {
         return id;
     }
@@ -48,7 +58,7 @@ public class Consultation implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public Date getDateHeureDemande() {
         return dateHeureDemande;
     }
@@ -88,7 +98,7 @@ public class Consultation implements Serializable {
     public void setClient(Client client) {
         this.client = client;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -111,7 +121,7 @@ public class Consultation implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.insalyon.dasi.td1.metier.modele.Consultation[ id=" + id +  "commentaire = "+commentaire+  " ]";
+        return "fr.insalyon.dasi.td1.metier.modele.Consultation[ id=" + id + "commentaire = " + commentaire + " ]";
     }
-    
+
 }

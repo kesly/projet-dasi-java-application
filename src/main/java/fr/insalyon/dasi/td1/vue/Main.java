@@ -11,6 +11,7 @@ package fr.insalyon.dasi.td1.vue;
  */
 
 import fr.insalyon.dasi.td1.metier.modele.Client;
+import fr.insalyon.dasi.td1.metier.modele.Medium;
 import fr.insalyon.dasi.td1.metier.service.Service;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +39,10 @@ public class Main {
         JpaUtil.init();
         
         //initialiserClients();// question 3
-        testerInscriptionClient(); // question 4 et 5 
+        testerInscriptionClient();
+        testerCreationMedium();
+        testerDemandeConsultation();
+        
         //testerRechercheClient(); // question 6
         //testerListeClient(); question 7
         //testerAuthentificationClient(); // question 8
@@ -55,7 +59,7 @@ public class Main {
         
         
         Client c1 = new Client("Kesly", "Gassant", "kekes@gmail.com", "password");
-       Client c2 = new Client("test", "test", "kekes@gmail.com", "password2");
+        Client c2 = new Client("test", "test", "kekes@gmail.com", "password2");
         Client c3 = new Client("Niels", "de Barbanson", "nielsdebarbanson@gmail.com", "mot2passe");
         
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -71,12 +75,29 @@ public class Main {
         service.inscriptionClient(c3);
         
     }
+
+
+    public static void testerCreationMedium(){
+
+        Medium medium1 = new Medium("cartomacien", "M", "je suis le meilleur");
+
+        Service service = new Service();
+        service.createMedium(medium1);
+
+    }
+
+
     
-    public static void ajoutConsultationPourClient(){
+    public static void testerDemandeConsultation(){
         
         // recuperer client
         
         Service service = new Service();
+        Client client = service.findClientById(1L);
+
+        Medium medium = service.findMediumById(7L);
+
+        service.demandeConsultation(client, medium);
         
         
         

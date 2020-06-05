@@ -196,9 +196,6 @@ public class Service {
     
     
     
-    
-    
-    
     public Medium findMediumById(Long id){
         MediumDao mediumDao = new MediumDao();
         
@@ -222,7 +219,7 @@ public class Service {
     }
     
    
-        public List<Medium> findAllMedium(){
+    public List<Medium> findAllMedium(){
         MediumDao mediumDao = new MediumDao();
         
         List<Medium> mediums = null;
@@ -271,7 +268,7 @@ public class Service {
     }
     
     
-        public Consultation demandeConsultation(Client client,  Medium medium){
+    public Consultation demandeConsultation(Client client,  Medium medium){
             
         ConsultationDao consultationDao = new ConsultationDao();
         
@@ -290,7 +287,8 @@ public class Service {
             consultationDao.create(consultation);
             
             client.addConsultation(consultation);
-            
+            medium.addConsultation(consultation);
+
             Logger.getAnonymousLogger().log(Level.INFO, "Succès: consultation trouve par id" + consultation.toString());
             
         } catch(Exception exception)
@@ -303,9 +301,32 @@ public class Service {
         return consultation;
         
     }
+
+
+    public void createMedium(Medium medium){
+
+        MediumDao mediumDao = new MediumDao();
+
+        try {
+            JpaUtil.creerContextePersistance();
+            JpaUtil.ouvrirTransaction();
+            mediumDao.create(medium);
+
+            JpaUtil.validerTransaction();
+            Logger.getAnonymousLogger().log(Level.INFO, "Success: createMedium " + medium.toString());
+
+        } catch(Exception exception)
+        {
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Error during createMedium " + exception);
+
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+
+    }
     
     
-    
+   
     
     
 }
