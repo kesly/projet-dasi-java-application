@@ -39,10 +39,12 @@ public class Main {
         JpaUtil.init();
         
         //initialiserClients();// question 3
+        testerInscriptionClient(); // question 4 et 5
+        testerObtenirPredictions();
         testerInscriptionClient();
         testerCreationMedium();
         testerDemandeConsultation();
-        
+
         //testerRechercheClient(); // question 6
         //testerListeClient(); question 7
         //testerAuthentificationClient(); // question 8
@@ -87,9 +89,31 @@ public class Main {
     }
 
 
-    
+
+    public static void testerObtenirPredictions() throws IOException {
+        Service service = new Service();
+        List<String> predictions;
+
+        predictions = service.obtenirPredictions("Bronze", "Ane", 3, 3, 1);
+        System.out.println("");
+        System.out.println("~<[Premières Prédictions]>~");
+        System.out.println("[ Amour ] " + predictions.get(0));
+        System.out.println("[ Santé ] " + predictions.get(1));
+        System.out.println("[Travail] " + predictions.get(2));
+        System.out.println("");
+
+        predictions = service.obtenirPredictions("Rouge tomette", "Yack", 2, 1, 4);
+        System.out.println("");
+        System.out.println("~<[Secondes Prédictions ]>~");
+        System.out.println("[ Amour ] " + predictions.get(0));
+        System.out.println("[ Santé ] " + predictions.get(1));
+        System.out.println("[Travail] " + predictions.get(2));
+        System.out.println("");
+    }
+
+    public static void ajoutConsultationPourClient(){
     public static void testerDemandeConsultation(){
-        
+
         // recuperer client
         
         Service service = new Service();
@@ -98,7 +122,7 @@ public class Main {
         Medium medium = service.findMediumById(7L);
 
         service.demandeConsultation(client, medium);
-        
+
         
         
         // ajouter consultation
