@@ -111,7 +111,6 @@ public class Main {
         System.out.println("");
     }
 
-    public static void ajoutConsultationPourClient(){
     public static void testerDemandeConsultation(){
 
         // recuperer client
