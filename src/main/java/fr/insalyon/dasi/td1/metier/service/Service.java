@@ -17,6 +17,7 @@ import fr.insalyon.dasi.td1.dao.ConsultationDao;
 import fr.insalyon.dasi.td1.dao.MediumDao;
 import static fr.insalyon.dasi.td1.metier.modele.Client_.id;
 import fr.insalyon.dasi.td1.metier.modele.Medium;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -285,28 +286,36 @@ public class Service {
             consultation.setCommentaire(null);
             
             consultationDao.create(consultation);
-            
+
             client.addConsultation(consultation);
             medium.addConsultation(consultation);
 
             Logger.getAnonymousLogger().log(Level.INFO, "Succès: consultation trouve par id" + consultation.toString());
-            
-        } catch(Exception exception)
-        {
+
+        } catch (Exception exception) {
             Logger.getAnonymousLogger().log(Level.SEVERE, "Erreur: impossible de faire la demande de consultation ayant l'id" + id.toString());
         } finally {
-            JpaUtil.fermerContextePersistance();    
+            JpaUtil.fermerContextePersistance();
         }
-        
+
         return consultation;
-        
+
     }
 
-        public List<String> obtenirPredictions(String couleur, String animal, int amour, int sante, int travail) throws IOException {
+    public List<String> obtenirPredictions(String couleur, String animal, int amour, int sante, int travail) throws IOException {
 
         AstroTest astroApi = new AstroTest();
         return astroApi.getPredictions(couleur, animal, amour, sante, travail);
 
+    }
+
+    public boolean demarrerConsultation(Consultation consultation){
+        Date now = Calendar.getInstance().getTime();
+        if (consultation.getClient() != null) {
+            consultation.setDateHeureDebut(now);
+                return true;
+        }
+        return false;
     }
 
 
