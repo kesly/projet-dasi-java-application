@@ -6,6 +6,7 @@
 package fr.insalyon.dasi.td1.metier.modele;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,12 +36,14 @@ public class Medium implements Serializable {
     }
 
     public Medium() {
+        this.consultations = new ArrayList<Consultation>();
     }
 
     public Medium(String denomination, String genre, String presentation) {
         this.denomination = denomination;
         this.genre = genre;
         this.presentation = presentation;
+        this.consultations = new ArrayList<Consultation>();
     }
 
     public void setGenre(String genre) {

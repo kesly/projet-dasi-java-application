@@ -26,8 +26,20 @@ public class Consultation implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    public Consultation() {
+    }
+
     @Temporal(TemporalType.TIME)
     private Date dateHeureDemande;
+
+    public Consultation(Date dateHeureDemande, String commentaire, Date dateHeureDebut, Date dateHeureFin, Client client, Medium medium) {
+        this.dateHeureDemande = dateHeureDemande;
+        this.commentaire = commentaire;
+        this.dateHeureDebut = dateHeureDebut;
+        this.dateHeureFin = dateHeureFin;
+        this.client = client;
+        this.medium = medium;
+    }
 
     private String commentaire;
 

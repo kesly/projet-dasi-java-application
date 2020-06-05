@@ -43,9 +43,9 @@ public class Main {
 
         //initialiserClients();// question 3
         testerInscriptionClient();
-        testerObtenirPredictions();
-        //testerCreationMedium();
-        //testerDemandeConsultation();
+        //testerObtenirPredictions();
+        testerCreationMedium();
+        testerDemandeConsultation();
 
         //testerRechercheClient(); // question 6
         //testerListeClient(); question 7
@@ -118,9 +118,15 @@ public class Main {
         Service service = new Service();
         Client client = service.findClientById(1L);
 
+//        System.out.println("test" + client.toString() );
+
+//        client.toString();
+
         Medium medium = service.findMediumById(7L);
 
-        service.demandeConsultation(client, medium);
+        Consultation c = service.demandeConsultation(client, medium);
+
+        System.out.println("consultation créé" + c.toString() );
 
 
         // ajouter consultation

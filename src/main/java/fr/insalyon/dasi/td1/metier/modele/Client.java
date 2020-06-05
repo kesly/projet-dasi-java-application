@@ -64,7 +64,6 @@ public class Client implements Serializable {
 
     public Client(){
         this.consultations = new ArrayList<Consultation>();
-
     }
     
     public ProfilAstral getProfilAstral() {

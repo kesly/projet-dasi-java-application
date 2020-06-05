@@ -269,23 +269,28 @@ public class Service {
         try {
             JpaUtil.creerContextePersistance();
 
+            JpaUtil.ouvrirTransaction();
+            
+            
             // create consultation
 
             consultation = new Consultation();
             consultation.setDateHeureDemande(new Date());
             consultation.setDateHeureDebut(null);
             consultation.setDateHeureFin(null);
-            consultation.setCommentaire(null);
+            consultation.setCommentaire("test");
 
             consultationDao.create(consultation);
 
             client.addConsultation(consultation);
             medium.addConsultation(consultation);
 
-            Logger.getAnonymousLogger().log(Level.INFO, "Succès: consultation trouve par id" + consultation.toString());
+            
+            JpaUtil.validerTransaction();
+            Logger.getAnonymousLogger().log(Level.INFO, "Succès: consultation créée" + consultation.toString());
 
         } catch (Exception exception) {
-            Logger.getAnonymousLogger().log(Level.SEVERE, "Erreur: impossible de faire la demande de consultation ayant l'id" + id.toString());
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Erreur: impossible de faire la demande de consultation ayant l'id" + client.toString());
         } finally {
             JpaUtil.fermerContextePersistance();
         }
