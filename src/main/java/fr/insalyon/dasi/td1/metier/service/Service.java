@@ -18,8 +18,6 @@ import java.io.StringWriter;
 import fr.insalyon.dasi.td1.dao.ConsultationDao;
 import fr.insalyon.dasi.td1.dao.MediumDao;
 
-import static fr.insalyon.dasi.td1.metier.modele.Client_.id;
-
 import fr.insalyon.dasi.td1.metier.modele.Medium;
 
 import java.util.Calendar;
@@ -264,14 +262,16 @@ public class Service {
     public Consultation demandeConsultation(Client client, Medium medium) {
 
         ConsultationDao consultationDao = new ConsultationDao();
+        ClientDao clientDao = new ClientDao();
+        MediumDao mediumDao = new MediumDao();
 
         Consultation consultation = null;
         try {
             JpaUtil.creerContextePersistance();
 
             JpaUtil.ouvrirTransaction();
-            
-            
+
+
             // create consultation
 
             consultation = new Consultation();
@@ -285,7 +285,9 @@ public class Service {
             client.addConsultation(consultation);
             medium.addConsultation(consultation);
 
-            
+            clientDao.update(client);
+            mediumDao.update(medium);
+
             JpaUtil.validerTransaction();
             Logger.getAnonymousLogger().log(Level.INFO, "Succès: consultation créée" + consultation.toString());
 

@@ -19,7 +19,12 @@ public class ClientDao {
     public void create(Client client){
         JpaUtil.obtenirContextePersistance().persist(client);
     }
-    
+
+    public void update(Client client){
+        JpaUtil.obtenirContextePersistance().merge(client);
+    }
+
+
     public Client findById(Long id){
         return JpaUtil.obtenirContextePersistance().find(Client.class, id);
     }

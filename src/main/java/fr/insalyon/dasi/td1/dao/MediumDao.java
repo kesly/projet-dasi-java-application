@@ -20,6 +20,10 @@ public class MediumDao {
         JpaUtil.obtenirContextePersistance().persist(medium);
     }
 
+    public void update(Medium medium){
+        JpaUtil.obtenirContextePersistance().merge(medium);
+    }
+
     public Medium findById(Long id){
         return JpaUtil.obtenirContextePersistance().find(Medium.class, id);
     }
