@@ -380,5 +380,7 @@ public class Service {
 
     }
 
-
+    public List<Consultation> consulterHistorique(Client client) {
+        return client.getConsultations();
+    }
 }

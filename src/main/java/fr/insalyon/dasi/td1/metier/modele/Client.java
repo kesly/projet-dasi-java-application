@@ -150,6 +150,10 @@ public class Client implements Serializable {
             consultation.setClient(this);
         }
     }
+
+    public List<Consultation> getConsultations() {
+        return consultations;
+    }
     
     
 
