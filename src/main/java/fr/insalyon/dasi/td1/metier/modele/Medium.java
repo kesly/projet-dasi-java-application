@@ -80,6 +80,7 @@ public class Medium implements Serializable {
 
         if (!this.consultations.contains(consultation)) {
             this.consultations.add(consultation);
+            consultation.setMedium(this);
         }
     }
 

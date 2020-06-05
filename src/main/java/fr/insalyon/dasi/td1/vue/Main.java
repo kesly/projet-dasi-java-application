@@ -45,7 +45,7 @@ public class Main {
         testerInscriptionClient();
         testerObtenirPredictions();
         testerCreationMedium();
-        //testerDemandeConsultation();
+        testerDemandeConsultation();
         testerDemarrerConsultation();
         testerTerminerConsultation();
 
