@@ -47,6 +47,7 @@ public class Main {
         testerCreationMedium();
         //testerDemandeConsultation();
         testerDemarrerConsultation();
+        testerTerminerConsultation();
 
         //testerRechercheClient(); // question 6
         //testerListeClient(); question 7
@@ -240,9 +241,17 @@ public class Main {
 
         Consultation consultation = new Consultation();
         Service service = new Service();
+        // @TODO: ajouter un employé à la consult
         Client c1 = service.findClientById(1L);
         c1.addConsultation(consultation);
         service.demarrerConsultation(consultation);
+    }
+    
+    public static void testerTerminerConsultation(){
+
+        Service service = new Service();
+        Consultation consultation = service.findConsultationById(8L);
+        service.terminerConsultation(consultation);
     }
 
 
