@@ -97,10 +97,10 @@ public class Service {
     public void inscriptionClient(Client client) throws IOException
     {
         ClientDao clientDao = new ClientDao();
-        AstroTest astroTest = new AstroTest();
+        AstroTest astroApi = new AstroTest();
         
         List<String> stringProfilAstral;
-        stringProfilAstral = astroTest.getProfil(client.getPrenom(),client.getDateNaissance());
+        stringProfilAstral = astroApi.getProfil(client.getPrenom(),client.getDateNaissance());
         ProfilAstral profilAstral = new ProfilAstral(stringProfilAstral.get(0),stringProfilAstral.get(1),stringProfilAstral.get(2),stringProfilAstral.get(3));
       
         try {
@@ -303,9 +303,12 @@ public class Service {
         return consultation;
         
     }
-    
-    
-    
-    
-    
+        
+        public List<String> obtenirPredictions(String couleur, String animal, int amour, int sante, int travail) throws IOException {
+
+        AstroTest astroApi = new AstroTest();
+        return astroApi.getPredictions(couleur, animal, amour, sante, travail);
+
+    }
+
 }
