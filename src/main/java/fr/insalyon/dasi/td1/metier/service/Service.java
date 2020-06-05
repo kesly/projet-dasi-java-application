@@ -308,11 +308,27 @@ public class Service {
 
     public boolean demarrerConsultation(Consultation consultation) {
         Date now = Calendar.getInstance().getTime();
-        if (consultation.getClient() != null) {
-            consultation.setDateHeureDebut(now);
-            return true;
+        ConsultationDao consultationDao = new ConsultationDao();
+
+        try {
+            JpaUtil.creerContextePersistance();
+            JpaUtil.ouvrirTransaction();
+
+            // @TODO: vérifier qu'il y a bien un employé d'associé à la consult
+            if (consultation.getClient() != null) {
+                consultation.setDateHeureDebut(now);
+//                consultationDao.update(consultation);
+                consultationDao.create(consultation);
+                JpaUtil.validerTransaction();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception exception) {
+            return false;
+        } finally {
+            JpaUtil.fermerContextePersistance();
         }
-        return false;
     }
 
 
