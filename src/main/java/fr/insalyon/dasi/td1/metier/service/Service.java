@@ -319,8 +319,33 @@ public class Service {
             // @TODO: vérifier qu'il y a bien un employé d'associé à la consult
             if (consultation.getClient() != null) {
                 consultation.setDateHeureDebut(now);
-//                consultationDao.update(consultation);
-                consultationDao.create(consultation);
+                // consultationDao.create(consultation);
+                consultationDao.update(consultation);
+                JpaUtil.validerTransaction();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception exception) {
+            return false;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+    }
+    
+    public boolean terminerConsultation(Consultation consultation) {
+        Date now = Calendar.getInstance().getTime();
+        ConsultationDao consultationDao = new ConsultationDao();
+
+        try {
+            JpaUtil.creerContextePersistance();
+            JpaUtil.ouvrirTransaction();
+
+            // @TODO: vérifier qu'il y a bien un employé d'associé à la consult
+            if (consultation.getClient() != null) {
+                consultation.setDateHeureFin(now);
+//                consultationDao.create(consultation);
+                consultationDao.update(consultation);
                 JpaUtil.validerTransaction();
                 return true;
             } else {

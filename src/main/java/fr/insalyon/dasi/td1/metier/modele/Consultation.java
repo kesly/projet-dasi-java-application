@@ -32,15 +32,6 @@ public class Consultation implements Serializable {
     @Temporal(TemporalType.TIME)
     private Date dateHeureDemande;
 
-    public Consultation(Date dateHeureDemande, String commentaire, Date dateHeureDebut, Date dateHeureFin, Client client, Medium medium) {
-        this.dateHeureDemande = dateHeureDemande;
-        this.commentaire = commentaire;
-        this.dateHeureDebut = dateHeureDebut;
-        this.dateHeureFin = dateHeureFin;
-        this.client = client;
-        this.medium = medium;
-    }
-
     private String commentaire;
 
     @Temporal(TemporalType.TIME)
@@ -54,6 +45,15 @@ public class Consultation implements Serializable {
 
     @ManyToOne
     private Medium medium;
+    
+    public Consultation(Date dateHeureDemande, String commentaire, Date dateHeureDebut, Date dateHeureFin, Client client, Medium medium) {
+        this.dateHeureDemande = dateHeureDemande;
+        this.commentaire = commentaire;
+        this.dateHeureDebut = dateHeureDebut;
+        this.dateHeureFin = dateHeureFin;
+        this.client = client;
+        this.medium = medium;
+    }
 
     public Medium getMedium() {
         return medium;
