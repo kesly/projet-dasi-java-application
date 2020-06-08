@@ -20,6 +20,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import fr.insalyon.dasi.td1.dao.JpaUtil;
+import fr.insalyon.dasi.td1.metier.modele.Astrologue;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -43,15 +44,15 @@ public class Main {
         System.out.print("Hello World");
         JpaUtil.init();
 
-        testerInscriptionClient();
-        testerAuthentificationClient();
-        testerObtenirPredictions();
+//        testerInscriptionClient();
+//        testerAuthentificationClient();
+//        testerObtenirPredictions();
         testerCreationMedium();
-        testerDemandeConsultation();
-        testerDemarrerConsultation();
-        testerTerminerConsultation();
-        testerConsulterHistorique();
-        testerAfficherStatistiques();
+//        testerDemandeConsultation();
+//        testerDemarrerConsultation();
+//        testerTerminerConsultation();
+//        testerConsulterHistorique();
+//        testerAfficherStatistiques();
 
 
 
@@ -91,9 +92,10 @@ public class Main {
     public static void testerCreationMedium() {
 
         Medium medium1 = new Medium("cartomacien", "M", "je suis le meilleur");
-
+        Astrologue as1 = new Astrologue("INSA","2020","Astr","M","C'est moi");
         Service service = new Service();
         service.createMedium(medium1);
+        service.createMedium(as1);
 
     }
 
