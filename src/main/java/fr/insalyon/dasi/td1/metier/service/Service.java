@@ -14,9 +14,11 @@ import java.io.StringWriter;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.List;
+import java.util.Map;
 
 import util.AstroTest;
 import util.Message;
@@ -413,21 +415,24 @@ public class Service {
 
     }
     
-    public void afficherStatistiques(){
+    public Statistiques afficherStatistiques(){
         MediumDao mediumDao = new MediumDao();
         List<Medium> mediums = null;
+        Statistiques statistiques = new Statistiques();
+        Integer nbConsults = 0;
+        HashMap<Long,Integer> nbConsultsParEmploye = new HashMap<Long,Integer>();
 
         try {
             JpaUtil.creerContextePersistance();
             mediums = mediumDao.findAll();
+            List<Consultation> consults;
 
-            List<Medium> mediumList = null;
-            mediumList = mediumDao.findTop5();
-
-            String t = "fgf";
-//            for( Medium medium : mediums){
-//                medium.getConsultations().size();
-//            }
+            for( Medium medium : mediums){
+                consults= medium.getConsultations();
+                nbConsults=medium.getConsultations().size();
+                nbConsultsParEmploye.put(medium.getId(), nbConsults);
+                statistiques.setNbConsultationParEmploye(nbConsultsParEmploye);
+            }
         } catch (Exception exception) {
             logger.severe("Error during authenticate " + exception);
         } finally {
@@ -435,7 +440,7 @@ public class Service {
         }
 
         
-        
+        return statistiques;
         
         
         
