@@ -43,6 +43,7 @@ public class Main {
 
         //initialiserClients();// question 3
         testerInscriptionClient();
+        testerAuthentificationClient();
         testerObtenirPredictions();
         testerCreationMedium();
         testerDemandeConsultation();
@@ -185,7 +186,6 @@ public class Main {
     }
 
     public static void testerAuthentificationClient() {
-
         Service service = new Service();
         Client c = service.getClientByAuthentication("kekes@gmail.com", "password");
 

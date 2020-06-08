@@ -5,20 +5,12 @@
  */
 package fr.insalyon.dasi.td1.metier.service;
 
-import fr.insalyon.dasi.td1.metier.modele.Client;
-import fr.insalyon.dasi.td1.metier.modele.Consultation;
-import fr.insalyon.dasi.td1.dao.JpaUtil;
-import fr.insalyon.dasi.td1.dao.ClientDao;
-import fr.insalyon.dasi.td1.metier.modele.ProfilAstral;
+import fr.insalyon.dasi.td1.dao.*;
+import fr.insalyon.dasi.td1.metier.modele.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-
-import fr.insalyon.dasi.td1.dao.ConsultationDao;
-import fr.insalyon.dasi.td1.dao.MediumDao;
-
-import fr.insalyon.dasi.td1.metier.modele.Medium;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -45,10 +37,10 @@ public class Service {
 
             client = clientDao.findById(id);
 
-            Logger.getAnonymousLogger().log(Level.INFO, "Succès " + client.toString());
+            Logger.getAnonymousLogger().log(Level.INFO, "Succès findClientById" + client.toString());
 
         } catch (Exception exception) {
-            Logger.getAnonymousLogger().log(Level.SEVERE, "Erreur: impossible de trouver le cliebnt ayant l'id" + id.toString());
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Erreur: impossible de trouver le client ayant l'id" + id.toString());
         } finally {
             JpaUtil.fermerContextePersistance();
         }
@@ -92,6 +84,22 @@ public class Service {
         }
 
         return client;
+    }
+
+    public Employe getEmployeByAuthentification(String mail, String motDePasse) {
+        EmployeDao employeDao = new EmployeDao();
+        Employe employe = null;
+
+        try {
+            JpaUtil.creerContextePersistance();
+            employe = employeDao.authenticate(mail, motDePasse);
+        } catch (Exception exception) {
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Error during authenticate Employe" + exception);
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+
+        return employe;
     }
 
     public void inscriptionClient(Client client) throws IOException {

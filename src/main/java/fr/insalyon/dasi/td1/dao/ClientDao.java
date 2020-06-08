@@ -39,7 +39,7 @@ public class ClientDao {
     {
         String s = "SELECT c FROM Client c WHERE c.mail = :mail and c.motDePasse = :mdp";
         Query query = JpaUtil.obtenirContextePersistance().createQuery(s);
-//        query.setParameter("mail", mail);
+        query.setParameter("mail", mail);
         query.setParameter("mdp", motDePasse);
         return (Client) query.getSingleResult();
     }
