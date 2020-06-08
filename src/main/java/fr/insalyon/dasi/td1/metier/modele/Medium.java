@@ -16,21 +16,23 @@ import javax.persistence.*;
  * @author keslygassant
  */
 @Entity
+@Inheritance (strategy = InheritanceType.JOINED)
+
 public class Medium implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    protected static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    protected Long id;
     
-    private String denomination;
+    protected String denomination;
 
-    private String genre;
+    protected String genre;
 
-    private String presentation;
+    protected String presentation;
 
     @OneToMany(mappedBy = "medium")
-    private List<Consultation> consultations;
+    protected List<Consultation> consultations;
 
     public String getDenomination() {
         return denomination;
