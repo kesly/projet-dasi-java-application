@@ -17,7 +17,7 @@ public class Statistiques {
     
     private Map<Long,Integer> nbConsultationParEmploye;
     
-    private Map<Long,Integer> clientsParEmploye;
+    private Map<Long,Long> clientsParEmploye;
     
     private List<Long> top5Mediums;
 
