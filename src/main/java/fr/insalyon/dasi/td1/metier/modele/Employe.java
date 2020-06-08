@@ -6,10 +6,8 @@
 package fr.insalyon.dasi.td1.metier.modele;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.List;
+import javax.persistence.*;
 
 /**
  *
@@ -35,7 +33,18 @@ public class Employe implements Serializable {
 
     private String genre;
 
+    public List<Consultation> getConsultations() {
+        return consultations;
+    }
+
+    public void setConsultations(List<Consultation> consultations) {
+        this.consultations = consultations;
+    }
+
     private String status;
+
+    @OneToMany
+    private List<Consultation> consultations;
 
     public String getMail() {
         return mail;

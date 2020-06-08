@@ -12,13 +12,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 import java.util.logging.Logger;
 import java.util.logging.Level;
-import java.util.List;
-import java.util.Map;
 
 import util.AstroTest;
 import util.Message;
@@ -433,6 +429,30 @@ public class Service {
                 nbConsultsParEmploye.put(medium.getId(), nbConsults);
                 statistiques.setNbConsultationParEmploye(nbConsultsParEmploye);
             }
+
+            EmployeDao EmployeDao = new EmployeDao();
+
+            List <Employe> employes = EmployeDao.findAll();
+            HashMap<Long, Integer> repartitionParEmploye = new HashMap<Long, Integer>();
+
+            for( Employe employe : employes){
+
+                repartitionParEmploye.put(employe.getId(), 0);
+                List <Consultation>  consultations = employe.getConsultations();
+
+                List<Long> listClient= new ArrayList<Long>();
+
+                for (Consultation consultation: consultations) {
+                    if( !listClient.contains(consultation.getClient().getId())){
+                        listClient.add(consultation.getClient().getId());
+                    }
+                }
+
+                repartitionParEmploye.put(employe.getId(), listClient.size());
+            }
+
+            statistiques.setClientsParEmploye( repartitionParEmploye);
+
         } catch (Exception exception) {
             logger.severe("Error during authenticate " + exception);
         } finally {
@@ -441,8 +461,7 @@ public class Service {
 
         
         return statistiques;
-        
-        
+
         
     }
 }

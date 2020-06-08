@@ -18,7 +18,7 @@ public class Statistiques {
     
     private HashMap<Long,Integer> nbConsultationParEmploye;
     
-    private HashMap<Long,Long> clientsParEmploye;
+    private HashMap<Long,Integer> clientsParEmploye;
     
     private List<Long> top5Mediums;
 
@@ -33,11 +33,11 @@ public class Statistiques {
         this.nbConsultationParEmploye = nbConsultationParEmploye;
     }
 
-    public HashMap<Long, Long> getClientsParEmploye() {
+    public HashMap<Long, Integer> getClientsParEmploye() {
         return clientsParEmploye;
     }
 
-    public void setClientsParEmploye(HashMap<Long, Long> clientsParEmploye) {
+    public void setClientsParEmploye(HashMap<Long, Integer> clientsParEmploye) {
         this.clientsParEmploye = clientsParEmploye;
     }
 

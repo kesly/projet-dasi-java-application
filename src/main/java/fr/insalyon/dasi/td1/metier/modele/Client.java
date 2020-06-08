@@ -6,7 +6,6 @@
 package fr.insalyon.dasi.td1.metier.modele;
 
 import fr.insalyon.dasi.td1.dao.JpaUtil;
-import static fr.insalyon.dasi.td1.metier.modele.Consultation_.client;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
