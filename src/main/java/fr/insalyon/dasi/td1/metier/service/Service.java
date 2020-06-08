@@ -130,9 +130,9 @@ public class Service {
             mailWriter.print("Bonjour ");
             mailWriter.print(client.getPrenom());
             mailWriter.println(",\n\n");
-            mailWriter.println("nous vous confirmons votre inscription au service PREDICT’IF. Rendez-\n"
+            mailWriter.println("Nous vous confirmons votre inscription au service PREDICT’IF.\nRendez-"
                     + "vous vite sur notre site pour consulter votre profil astrologique et profiter des dons\n"
-                    + "incroyables de nos mediums");
+                    + "incroyables de nos mediums.\n\nCordialement, l'equipe Predict'IF.");
             Message.envoyerMail(ADRESSEMAILPREDICTIF,
                     client.getMail(),
                     "Bienvenue chez PREDICT’IF",
