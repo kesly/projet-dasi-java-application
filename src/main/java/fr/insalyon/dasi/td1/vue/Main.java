@@ -9,7 +9,6 @@ package fr.insalyon.dasi.td1.vue;
  * @author keslygassant
  */
 
-import com.sun.org.glassfish.external.statistics.Statistic;
 import fr.insalyon.dasi.td1.metier.modele.Client;
 import fr.insalyon.dasi.td1.metier.modele.Medium;
 import fr.insalyon.dasi.td1.metier.service.Service;

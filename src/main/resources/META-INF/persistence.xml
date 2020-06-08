@@ -7,6 +7,9 @@
     <class>fr.insalyon.dasi.td1.metier.modele.Consultation</class>
     <class>fr.insalyon.dasi.td1.metier.modele.Medium</class>
     <class>fr.insalyon.dasi.td1.metier.modele.Employe</class>
+    <class>fr.insalyon.dasi.td1.metier.modele.Astrologue</class>
+    <class>fr.insalyon.dasi.td1.metier.modele.Cartomancien</class>
+    <class>fr.insalyon.dasi.td1.metier.modele.Spirite</class> 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/dasi-ifa"/>
       <property name="javax.persistence.jdbc.user" value="dasi"/>
