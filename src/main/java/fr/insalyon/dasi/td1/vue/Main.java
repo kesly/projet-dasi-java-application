@@ -50,6 +50,7 @@ public class Main {
         testerDemarrerConsultation();
         testerTerminerConsultation();
         testerConsulterHistorique();
+        testerAfficherStatistiques();
 
         //testerRechercheClient(); // question 6
         //testerListeClient(); question 7
@@ -276,4 +277,9 @@ public class Main {
         }
     }
 
+    
+    public static void testerAfficherStatistiques() {
+        Service service = new Service();
+        service.afficherStatistiques();
+    }
 }
