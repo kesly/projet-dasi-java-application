@@ -9,11 +9,11 @@ package fr.insalyon.dasi.td1.vue;
  * @author keslygassant
  */
 
+import com.sun.org.glassfish.external.statistics.Statistic;
 import fr.insalyon.dasi.td1.metier.modele.Client;
 import fr.insalyon.dasi.td1.metier.modele.Medium;
 import fr.insalyon.dasi.td1.metier.service.Service;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,9 +27,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import fr.insalyon.dasi.td1.metier.modele.Consultation;
+import fr.insalyon.dasi.td1.metier.modele.Statistiques;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Main {
@@ -280,6 +283,22 @@ public class Main {
     
     public static void testerAfficherStatistiques() {
         Service service = new Service();
-        service.afficherStatistiques();
+        Statistiques statistique = service.afficherStatistiques();
+        String nomMedium = null;
+        
+        System.out.println("###########################################");
+        System.out.println("            Statistiques:                 \n");
+        
+        
+        System.out.println("Nombres de Consults par medium\n");
+        for(Long idMedium: statistique.getNbConsultationParEmploye().keySet()){
+            nomMedium=service.findMediumById(idMedium).getDenomination();
+            System.out.println("Le médium "+ nomMedium + " a réalisé " + statistique.getNbConsultationParEmploye().get(idMedium)+ " consultations\n" );
+        }
+
+
+        System.out.println("###########################################");
+
+        
     }
 }

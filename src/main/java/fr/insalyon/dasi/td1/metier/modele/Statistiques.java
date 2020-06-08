@@ -5,6 +5,7 @@
  */
 package fr.insalyon.dasi.td1.metier.modele;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,21 +16,29 @@ import java.util.Map;
 public class Statistiques {
     
     
-    private Map<Long,Integer> nbConsultationParEmploye;
+    private HashMap<Long,Integer> nbConsultationParEmploye;
     
-    private Map<Long,Long> clientsParEmploye;
+    private HashMap<Long,Long> clientsParEmploye;
     
     private List<Long> top5Mediums;
 
     public Statistiques() {
     }
-    
-    public Map<Long, Integer> getNbConsultationParEmploye() {
+
+    public HashMap<Long, Integer> getNbConsultationParEmploye() {
         return nbConsultationParEmploye;
     }
 
-    public void setNbConsultationParEmploye(Map<Long, Integer> nbConsultationParEmploye) {
+    public void setNbConsultationParEmploye(HashMap<Long, Integer> nbConsultationParEmploye) {
         this.nbConsultationParEmploye = nbConsultationParEmploye;
+    }
+
+    public HashMap<Long, Long> getClientsParEmploye() {
+        return clientsParEmploye;
+    }
+
+    public void setClientsParEmploye(HashMap<Long, Long> clientsParEmploye) {
+        this.clientsParEmploye = clientsParEmploye;
     }
 
     public List<Long> getTop5Mediums() {
@@ -39,12 +48,6 @@ public class Statistiques {
     public void setTop5Mediums(List<Long> top5Mediums) {
         this.top5Mediums = top5Mediums;
     }
-
-    public Map<Long, Long> getClientsParEmploye() {
-        return clientsParEmploye;
-    }
-
-    public void setClientsParEmploye(Map<Long, Long> clientsParEmploye) {
-        this.clientsParEmploye = clientsParEmploye;
-    }
+    
+   
 }
