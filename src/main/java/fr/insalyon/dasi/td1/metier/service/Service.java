@@ -27,6 +27,9 @@ import util.Message;
 public class Service {
 
     private static final String ADRESSEMAILPREDICTIF = "contact@predict.if";
+    
+    private static Logger logger = Logger.getAnonymousLogger();
+
 
     public Client findClientById(Long id) {
         ClientDao clientDao = new ClientDao();
@@ -408,5 +411,29 @@ public class Service {
             JpaUtil.fermerContextePersistance();
         }
 
+    }
+    
+    public void afficherStatistiques(){
+        MediumDao mediumDao = new MediumDao();
+        List<Medium> mediums = null;
+
+        try {
+            JpaUtil.creerContextePersistance();
+            mediums = mediumDao.findAll();
+            
+            for( Medium medium : mediums){
+                
+            }
+        } catch (Exception exception) {
+            logger.severe("Error during authenticate " + exception);
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+
+        
+        
+        
+        
+        
     }
 }
