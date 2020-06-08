@@ -9,8 +9,7 @@ package fr.insalyon.dasi.td1.vue;
  * @author keslygassant
  */
 
-import fr.insalyon.dasi.td1.metier.modele.Client;
-import fr.insalyon.dasi.td1.metier.modele.Medium;
+import fr.insalyon.dasi.td1.metier.modele.*;
 import fr.insalyon.dasi.td1.metier.service.Service;
 
 import java.util.logging.Logger;
@@ -20,14 +19,10 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import fr.insalyon.dasi.td1.dao.JpaUtil;
-import fr.insalyon.dasi.td1.metier.modele.Astrologue;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
-import fr.insalyon.dasi.td1.metier.modele.Consultation;
-import fr.insalyon.dasi.td1.metier.modele.Statistiques;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -44,15 +39,15 @@ public class Main {
         System.out.print("Hello World");
         JpaUtil.init();
 
-//        testerInscriptionClient();
-//        testerAuthentificationClient();
-//        testerObtenirPredictions();
+        testerInscriptionClient();
+        testerAuthentificationClient();
+        testerObtenirPredictions();
         testerCreationMedium();
-//        testerDemandeConsultation();
-//        testerDemarrerConsultation();
-//        testerTerminerConsultation();
-//        testerConsulterHistorique();
-//        testerAfficherStatistiques();
+        testerDemandeConsultation();
+        testerDemarrerConsultation();
+        testerTerminerConsultation();
+        testerConsulterHistorique();
+        testerAfficherStatistiques();
 
 
 
@@ -91,7 +86,7 @@ public class Main {
 
     public static void testerCreationMedium() {
 
-        Medium medium1 = new Medium("cartomacien", "M", "je suis le meilleur");
+        Medium medium1 = new Cartomancien("cartomacien", "M", "je suis le meilleur");
         Astrologue as1 = new Astrologue("INSA","2020","Astr","M","C'est moi");
         Service service = new Service();
         service.createMedium(medium1);
