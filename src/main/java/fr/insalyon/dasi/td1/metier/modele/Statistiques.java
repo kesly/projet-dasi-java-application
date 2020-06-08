@@ -32,14 +32,6 @@ public class Statistiques {
         this.nbConsultationParEmploye = nbConsultationParEmploye;
     }
 
-    public Map<Long, Integer> getClientsParEmploye() {
-        return clientsParEmploye;
-    }
-
-    public void setClientsParEmploye(Map<Long, Integer> clientsParEmploye) {
-        this.clientsParEmploye = clientsParEmploye;
-    }
-
     public List<Long> getTop5Mediums() {
         return top5Mediums;
     }
@@ -47,8 +39,12 @@ public class Statistiques {
     public void setTop5Mediums(List<Long> top5Mediums) {
         this.top5Mediums = top5Mediums;
     }
-    
-    
-    
-    
+
+    public Map<Long, Long> getClientsParEmploye() {
+        return clientsParEmploye;
+    }
+
+    public void setClientsParEmploye(Map<Long, Long> clientsParEmploye) {
+        this.clientsParEmploye = clientsParEmploye;
+    }
 }

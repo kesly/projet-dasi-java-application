@@ -22,6 +22,15 @@ public class Medium implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    private String denomination;
+
+    private String genre;
+
+    private String presentation;
+
+    @OneToMany(mappedBy = "medium")
+    private List<Consultation> consultations;
 
     public String getDenomination() {
         return denomination;
@@ -58,14 +67,6 @@ public class Medium implements Serializable {
         this.presentation = presentation;
     }
 
-    private String denomination;
-
-    private String genre;
-
-    private String presentation;
-
-    @OneToMany(mappedBy = "medium")
-    private List<Consultation> consultations;
 
     public List<Consultation> getConsultations() {
         return consultations;
