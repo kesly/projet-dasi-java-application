@@ -98,7 +98,10 @@ public class Main {
         Service service = new Service();
         List<String> predictions;
 
-        predictions = service.obtenirPredictions("Bronze", "Ane", 3, 3, 1);
+        Client client1 = service.findClientById(1L);
+        Client client2 = service.findClientById(5L);
+
+        predictions = service.obtenirPredictions(client1, 3, 3, 1);
         System.out.println("");
         System.out.println("~<[Premières Prédictions]>~");
         System.out.println("[ Amour ] " + predictions.get(0));
@@ -106,7 +109,7 @@ public class Main {
         System.out.println("[Travail] " + predictions.get(2));
         System.out.println("");
 
-        predictions = service.obtenirPredictions("Rouge tomette", "Yack", 2, 1, 4);
+        predictions = service.obtenirPredictions(client2, 2, 1, 4);
         System.out.println("");
         System.out.println("~<[Secondes Prédictions ]>~");
         System.out.println("[ Amour ] " + predictions.get(0));
@@ -258,7 +261,7 @@ public class Main {
         Service service = new Service();
         Client c1 = service.findClientById(1L);
         List<Consultation> historique;
-        historique = service.consulterHistorique(c1);
+        historique = c1.getConsultations();
 
         System.out.println("Historique des consultations de " + c1.getPrenom() + " : \n");
 
@@ -269,7 +272,7 @@ public class Main {
 //            System.out.println("Avec le médium: " + consult.getMedium().toString() + "\n");
             System.out.println("de  : " + consult.getDateHeureDebut().toString() + "\n");
             System.out.println("à : " + consult.getDateHeureFin().toString() + "\n");
-            System.out.println("Comementaire : " + consult.getCommentaire() + "\n");
+            System.out.println("Commentaire : " + consult.getCommentaire() + "\n");
         }
     }
 
