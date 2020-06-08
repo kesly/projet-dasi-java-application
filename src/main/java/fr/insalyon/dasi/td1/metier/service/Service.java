@@ -301,10 +301,11 @@ public class Service {
 
     }
 
-    public List<String> obtenirPredictions(String couleur, String animal, int amour, int sante, int travail) throws IOException {
+    public List<String> obtenirPredictions(Client client, int amour, int sante, int travail) throws IOException {
 
         AstroTest astroApi = new AstroTest();
-        return astroApi.getPredictions(couleur, animal, amour, sante, travail);
+        ProfilAstral profilAstral= client.getProfilAstral();
+        return astroApi.getPredictions(profilAstral.getCouleurPorteBonheur(),profilAstral.getAnimalTotem(), amour, sante, travail);
 
     }
 
@@ -378,9 +379,5 @@ public class Service {
             JpaUtil.fermerContextePersistance();
         }
 
-    }
-
-    public List<Consultation> consulterHistorique(Client client) {
-        return client.getConsultations();
     }
 }
