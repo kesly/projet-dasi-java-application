@@ -49,6 +49,27 @@ public class Service {
 
     }
 
+    public Employe findEmployeById(Long id) {
+        EmployeDao employeDao = new EmployeDao();
+
+        Employe employe = null;
+        try {
+            JpaUtil.creerContextePersistance();
+
+            employe = employeDao.findById(id);
+
+            Logger.getAnonymousLogger().log(Level.INFO, "Succès findEmployeById" + employe.toString());
+
+        } catch (Exception exception) {
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Erreur: impossible de trouver le client ayant l'id" + id.toString());
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+
+        return employe;
+
+    }
+
     public List<Client> findAllClient() {
         ClientDao clientDao = new ClientDao();
 

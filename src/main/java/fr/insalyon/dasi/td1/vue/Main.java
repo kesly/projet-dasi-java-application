@@ -41,7 +41,6 @@ public class Main {
         System.out.print("Hello World");
         JpaUtil.init();
 
-        //initialiserClients();// question 3
         testerInscriptionClient();
         testerAuthentificationClient();
         testerObtenirPredictions();

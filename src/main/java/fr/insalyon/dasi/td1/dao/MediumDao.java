@@ -33,5 +33,11 @@ public class MediumDao {
         TypedQuery<Medium> query = JpaUtil.obtenirContextePersistance().createQuery(s, Medium.class);
         return query.getResultList();
     }
-    
+
+
+    public List<Medium> findTop5(){
+        String s = "SELECT m FROM Medium m join consultations c ORDER BY ";
+        TypedQuery<Medium> query = JpaUtil.obtenirContextePersistance().createQuery(s, Medium.class);
+        return query.getResultList();
+    }
 }
