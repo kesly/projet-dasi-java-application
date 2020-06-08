@@ -420,10 +420,14 @@ public class Service {
         try {
             JpaUtil.creerContextePersistance();
             mediums = mediumDao.findAll();
-            
-            for( Medium medium : mediums){
-                
-            }
+
+            List<Medium> mediumList = null;
+            mediumList = mediumDao.findTop5();
+
+            String t = "fgf";
+//            for( Medium medium : mediums){
+//                medium.getConsultations().size();
+//            }
         } catch (Exception exception) {
             logger.severe("Error during authenticate " + exception);
         } finally {

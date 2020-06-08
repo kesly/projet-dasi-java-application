@@ -51,6 +51,8 @@ public class Main {
         testerConsulterHistorique();
         testerAfficherStatistiques();
 
+
+
         //testerRechercheClient(); // question 6
         //testerListeClient(); question 7
         //testerAuthentificationClient(); // question 8
@@ -131,9 +133,10 @@ public class Main {
 
         Medium medium = service.findMediumById(7L);
 
-        Consultation c = service.demandeConsultation(client, medium);
+        Consultation c1 = service.demandeConsultation(client, medium);
+        Consultation c2 = service.demandeConsultation(client, medium);
 
-        System.out.println("consultation créé" + c.toString() );
+        System.out.println("consultation créé" + c1.toString() );
 
 
         // ajouter consultation

@@ -36,7 +36,7 @@ public class MediumDao {
 
 
     public List<Medium> findTop5(){
-        String s = "SELECT m FROM Medium m join consultations c ORDER BY ";
+        String s = "SELECT m, count(c) as nb from Medium m left join m.consultations c GROUP BY m ORDER BY nb DESC";
         TypedQuery<Medium> query = JpaUtil.obtenirContextePersistance().createQuery(s, Medium.class);
         return query.getResultList();
     }
