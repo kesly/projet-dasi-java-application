@@ -35,8 +35,8 @@ public class Main {
     private static Logger logger = Logger.getAnonymousLogger();
 
     public static void main(String args[]) throws IOException, ParseException {
-        logger.info("Succès authentification");
-        System.out.print("Hello World");
+        
+       
         JpaUtil.init();
 
         testerInscriptionClient();
@@ -51,8 +51,8 @@ public class Main {
 
 
 
-        //testerRechercheClient(); // question 6
-        //testerListeClient(); question 7
+        //testerRechercheClient();
+        //testerListeClient();
         //testerAuthentificationClient(); // question 8
 
 //        testerListeConsultationParClient();
@@ -162,7 +162,7 @@ public class Main {
 
 
         service.inscriptionClient(c1);
-        service.createConsultation(consultation);
+        //service.createConsultation(consultation);
         //service.recruter(c2);
 
 
@@ -245,7 +245,9 @@ public class Main {
 
     public static void testerDemarrerConsultation(){
         Service service = new Service();
-        Consultation consultation = service.findConsultationById(8L);
+        Consultation consultation = service.findConsultationById(9L);
+
+
         // @TODO: ajouter un employé à la consult
         Client c1 = service.findClientById(1L);
         c1.addConsultation(consultation);

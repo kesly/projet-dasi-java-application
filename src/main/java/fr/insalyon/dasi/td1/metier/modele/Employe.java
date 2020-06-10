@@ -33,6 +33,8 @@ public class Employe implements Serializable {
 
     private String genre;
 
+    private String status;
+
     public List<Consultation> getConsultations() {
         return consultations;
     }
@@ -41,7 +43,6 @@ public class Employe implements Serializable {
         this.consultations = consultations;
     }
 
-    private String status;
 
     @OneToMany
     private List<Consultation> consultations;

@@ -201,26 +201,6 @@ public class Service {
     }
 
 
-    public void createConsultation(Consultation consultation) {
-
-        ConsultationDao consultationDao = new ConsultationDao();
-
-        try {
-            JpaUtil.creerContextePersistance();
-            JpaUtil.ouvrirTransaction();
-            consultationDao.create(consultation);
-            JpaUtil.validerTransaction();
-            Logger.getAnonymousLogger().log(Level.INFO, "Success: createConsultation " + consultation.toString());
-
-        } catch (Exception exception) {
-            Logger.getAnonymousLogger().log(Level.SEVERE, "Error during createConsultation " + exception);
-
-        } finally {
-            JpaUtil.fermerContextePersistance();
-        }
-
-    }
-
 
     public Medium findMediumById(Long id) {
         MediumDao mediumDao = new MediumDao();
