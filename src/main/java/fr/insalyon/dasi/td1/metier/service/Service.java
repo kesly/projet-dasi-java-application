@@ -25,7 +25,7 @@ import util.Message;
 public class Service {
 
     private static final String ADRESSEMAILPREDICTIF = "contact@predict.if";
-    
+
     private static Logger logger = Logger.getAnonymousLogger();
 
 
@@ -201,7 +201,6 @@ public class Service {
     }
 
 
-
     public Medium findMediumById(Long id) {
         MediumDao mediumDao = new MediumDao();
 
@@ -268,6 +267,34 @@ public class Service {
 
     }
 
+    public Employe findGoodEmploye(String genre) {
+
+        EmployeDao employeDao = new EmployeDao();
+
+        List<Employe> employeList = null;
+        Employe goodEmploye = null;
+        try {
+            JpaUtil.creerContextePersistance();
+
+            employeList = employeDao.findAll();
+
+            for (Employe employe : employeList) {
+                if (employe.getGenre().equals(genre) && employe.isEstDisponible()) {
+                    goodEmploye = employe;
+                }
+            }
+
+            Logger.getAnonymousLogger().log(Level.INFO, "Succès: good employee trouvé" + goodEmploye.toString());
+
+        } catch (Exception exception) {
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Erreur: impossible de trouver un employe" + genre);
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+
+        return goodEmploye;
+    }
+
 
     public Consultation demandeConsultation(Client client, Medium medium) {
 
@@ -275,12 +302,13 @@ public class Service {
         ClientDao clientDao = new ClientDao();
         MediumDao mediumDao = new MediumDao();
 
+
         Consultation consultation = null;
+        Employe employe = null;
         try {
             JpaUtil.creerContextePersistance();
 
             JpaUtil.ouvrirTransaction();
-
 
             // create consultation
 
@@ -294,6 +322,15 @@ public class Service {
 
             client.addConsultation(consultation);
             medium.addConsultation(consultation);
+
+            employe = this.findGoodEmploye(medium.getGenre());
+
+            if (employe != null) {
+                employe.addConsultation(consultation);
+                employe.setEstDisponible(false);
+            } else {
+                // error message no employe found
+            }
 
             clientDao.update(client);
             mediumDao.update(medium);
@@ -314,8 +351,8 @@ public class Service {
     public List<String> obtenirPredictions(Client client, int amour, int sante, int travail) throws IOException {
 
         AstroTest astroApi = new AstroTest();
-        ProfilAstral profilAstral= client.getProfilAstral();
-        return astroApi.getPredictions(profilAstral.getCouleurPorteBonheur(),profilAstral.getAnimalTotem(), amour, sante, travail);
+        ProfilAstral profilAstral = client.getProfilAstral();
+        return astroApi.getPredictions(profilAstral.getCouleurPorteBonheur(), profilAstral.getAnimalTotem(), amour, sante, travail);
 
     }
 
@@ -343,7 +380,7 @@ public class Service {
             JpaUtil.fermerContextePersistance();
         }
     }
-    
+
     public boolean terminerConsultation(Consultation consultation) {
         Date now = Calendar.getInstance().getTime();
         ConsultationDao consultationDao = new ConsultationDao();
@@ -355,7 +392,11 @@ public class Service {
             // @TODO: vérifier qu'il y a bien un employé d'associé à la consult
             if (consultation.getClient() != null) {
                 consultation.setDateHeureFin(now);
-//                consultationDao.create(consultation);
+
+                Employe employe = consultation.getEmploye();
+
+                employe.setEstDisponible(true);
+
                 consultationDao.update(consultation);
                 JpaUtil.validerTransaction();
                 return true;
@@ -390,40 +431,40 @@ public class Service {
         }
 
     }
-    
-    public Statistiques afficherStatistiques(){
+
+    public Statistiques afficherStatistiques() {
         MediumDao mediumDao = new MediumDao();
         List<Medium> mediums = null;
         Statistiques statistiques = new Statistiques();
         Integer nbConsults = 0;
-        HashMap<Long,Integer> nbConsultsParEmploye = new HashMap<Long,Integer>();
+        HashMap<Long, Integer> nbConsultsParEmploye = new HashMap<Long, Integer>();
 
         try {
             JpaUtil.creerContextePersistance();
             mediums = mediumDao.findAll();
             List<Consultation> consults;
 
-            for( Medium medium : mediums){
-                consults= medium.getConsultations();
-                nbConsults=medium.getConsultations().size();
+            for (Medium medium : mediums) {
+                consults = medium.getConsultations();
+                nbConsults = medium.getConsultations().size();
                 nbConsultsParEmploye.put(medium.getId(), nbConsults);
                 statistiques.setNbConsultationParEmploye(nbConsultsParEmploye);
             }
 
             EmployeDao EmployeDao = new EmployeDao();
 
-            List <Employe> employes = EmployeDao.findAll();
+            List<Employe> employes = EmployeDao.findAll();
             HashMap<Long, Integer> repartitionParEmploye = new HashMap<Long, Integer>();
 
-            for( Employe employe : employes){
+            for (Employe employe : employes) {
 
                 repartitionParEmploye.put(employe.getId(), 0);
-                List <Consultation>  consultations = employe.getConsultations();
+                List<Consultation> consultations = employe.getConsultations();
 
-                List<Long> listClient= new ArrayList<Long>();
+                List<Long> listClient = new ArrayList<Long>();
 
-                for (Consultation consultation: consultations) {
-                    if( !listClient.contains(consultation.getClient().getId())){
+                for (Consultation consultation : consultations) {
+                    if (!listClient.contains(consultation.getClient().getId())) {
                         listClient.add(consultation.getClient().getId());
                     }
                 }
@@ -431,7 +472,7 @@ public class Service {
                 repartitionParEmploye.put(employe.getId(), listClient.size());
             }
 
-            statistiques.setClientsParEmploye( repartitionParEmploye);
+            statistiques.setClientsParEmploye(repartitionParEmploye);
 
         } catch (Exception exception) {
             logger.severe("Error during authenticate " + exception);
@@ -439,9 +480,64 @@ public class Service {
             JpaUtil.fermerContextePersistance();
         }
 
-        
+
         return statistiques;
 
-        
+
+    }
+
+
+    public boolean initialisationSysteme() {
+
+        MediumDao mediumDao = new MediumDao();
+        EmployeDao employeDao = new EmployeDao();
+        boolean methodSuccess = true;
+
+        try {
+            JpaUtil.creerContextePersistance();
+            JpaUtil.ouvrirTransaction();
+
+            List<Medium> mediumList = new ArrayList<Medium>();
+            List<Employe> employeList = new ArrayList<Employe>();
+
+            mediumList.add(new Spirite("Boule de cristal", "Gwenaëlle", "F", " Spécialiste des grandes conversations au-delà de TOUTES les frontières"));
+            mediumList.add(new Spirite("Marc de café, boule de cristal, oreilles de lapin", "Professeur Tran", "H", "Votre avenir est devant vous : regardons-le ensemble !"));
+
+
+            mediumList.add(new Cartomancien("Mme Irma", "F", "Comprenez votre entourage grâce à mes cartes ! Résultats rapides."));
+            mediumList.add(new Cartomancien(" Endora", "F", "Mes cartes répondront à toutes vos questions personnelles"));
+
+            mediumList.add(new Astrologue("École Normale Supérieure d’Astrologie (ENS-Astro)", "2006", "Serena", "F", "Basée à Champigny-sur-Marne, Serena vous révèlera votre avenir pour éclairer votre\n" +
+                    "passé."));
+
+            mediumList.add(new Astrologue("Institut des Nouveaux Savoirs Astrologiques", "2010", "Mr M", "H", " Avenir, avenir, que nous réserves-tu ? N'attendez plus, demandez à me consulter!"));
+
+
+            for (Medium medium : mediumList) {
+                mediumDao.create(medium);
+            }
+
+            employeList.add(new Employe("employe1@astroif.fr", "jean", "camille", "12345", "0667234565", "F", true));
+            employeList.add(new Employe("employe2@astroif.fr", "pierre", "dupont", "12345", "0667234565", "H", true));
+            employeList.add(new Employe("employe3@astroif.fr", "du jardin", "simone", "12345", "0667234565", "F", true));
+
+            for (Employe employe : employeList) {
+                employeDao.create(employe);
+            }
+
+            JpaUtil.validerTransaction();
+            Logger.getAnonymousLogger().log(Level.INFO, "Success: initialisation ");
+
+            methodSuccess = true;
+
+        } catch (Exception exception) {
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Error during createMedium " + exception);
+            methodSuccess = false;
+
+        } finally {
+            JpaUtil.fermerContextePersistance();
+            return methodSuccess;
+        }
+
     }
 }

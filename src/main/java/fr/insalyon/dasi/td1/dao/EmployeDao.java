@@ -10,27 +10,34 @@ import java.util.List;
 
 public class EmployeDao {
 
-    public void create(Employe employe){
+    public void create(Employe employe) {
         JpaUtil.obtenirContextePersistance().persist(employe);
     }
 
-    public void update(Employe employe){
+    public void update(Employe employe) {
         JpaUtil.obtenirContextePersistance().merge(employe);
     }
 
 
-    public Employe findById(Long id){
+    public Employe findById(Long id) {
         return JpaUtil.obtenirContextePersistance().find(Employe.class, id);
     }
 
-    public List<Employe> findAll(){
+    public List<Employe> findAll() {
         String s = "SELECT e FROM Employe e";
         TypedQuery<Employe> query = JpaUtil.obtenirContextePersistance().createQuery(s, Employe.class);
         return query.getResultList();
     }
 
-    public Employe authenticate(String mail, String motDePasse)
-    {
+    public List<Employe> findAllGoodEmploye(String genre) {
+        String s = "SELECT e FROM Employe e where e.genre =:genre AND e.estDisponible = :estDisponible";
+        TypedQuery<Employe> query = JpaUtil.obtenirContextePersistance().createQuery(s, Employe.class);
+        query.setParameter("genre", genre);
+        query.setParameter("estDisponible", true);
+        return query.getResultList();
+    }
+
+    public Employe authenticate(String mail, String motDePasse) {
         String s = "SELECT e FROM Employe e WHERE e.mail = :mail and e.motDePasse = :mdp";
         Query query = JpaUtil.obtenirContextePersistance().createQuery(s);
         query.setParameter("mail", mail);

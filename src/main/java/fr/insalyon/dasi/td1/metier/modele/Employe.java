@@ -7,6 +7,8 @@ package fr.insalyon.dasi.td1.metier.modele;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.*;
 
 /**
@@ -33,7 +35,20 @@ public class Employe implements Serializable {
 
     private String genre;
 
-    private String status;
+    private boolean estDisponible;
+
+    @OneToMany(mappedBy = "employe")
+    private List<Consultation> consultations;
+
+    public Employe(String mail, String nom, String prenom, String motDePasse, String telephone, String genre, boolean estDisponible) {
+        this.mail = mail;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.motDePasse = motDePasse;
+        this.telephone = telephone;
+        this.genre = genre;
+        this.estDisponible = estDisponible;
+    }
 
     public List<Consultation> getConsultations() {
         return consultations;
@@ -43,23 +58,26 @@ public class Employe implements Serializable {
         this.consultations = consultations;
     }
 
+    public void addConsultation(Consultation consultation)
+    {
+        Logger.getAnonymousLogger().log(Level.INFO, "consul " + consultation.toString());
 
-    @OneToMany
-    private List<Consultation> consultations;
+        if (!this.consultations.contains(consultation)) {
+            this.consultations.add(consultation);
+            consultation.setEmploye(this);
+        }
+    }
 
     public String getMail() {
         return mail;
     }
 
-    public Employe(String mail, String nom, String prenom, String motDePasse, String telephone, String motDePasse1, String genre, String status) {
-        this.mail = mail;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.motDePasse = motDePasse;
-        this.telephone = telephone;
-        this.motDePasse = motDePasse1;
-        this.genre = genre;
-        this.status = status;
+    public boolean isEstDisponible() {
+        return estDisponible;
+    }
+
+    public void setEstDisponible(boolean estDisponible) {
+        this.estDisponible = estDisponible;
     }
 
     public Employe() {
@@ -99,14 +117,6 @@ public class Employe implements Serializable {
 
     public void setGenre(String genre) {
         this.genre = genre;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getTelephone() {
