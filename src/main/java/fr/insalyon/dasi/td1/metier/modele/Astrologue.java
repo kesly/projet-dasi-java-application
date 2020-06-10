@@ -15,34 +15,34 @@ import javax.persistence.*;
 @Entity
 public class Astrologue extends Medium implements Serializable{
     
-    private String promotion;
+    private String formation;
 
-    private String anneepromotion; 
+    private String anneePromotion;
 
     public Astrologue() {
     }
 
-    public Astrologue(String promotion, String anneepromotion, String denomination, String genre, String presentation) {
+    public Astrologue(String formation, String anneepromotion, String denomination, String genre, String presentation) {
         super(denomination, genre, presentation);
-        this.promotion = promotion;
-        this.anneepromotion = anneepromotion;
+        this.formation = formation;
+        this.anneePromotion = anneepromotion;
     }
 
     
-    public String getPromotion() {
-        return promotion;
+    public String getFormation() {
+        return formation;
     }
 
-    public void setPromotion(String promotion) {
-        this.promotion = promotion;
+    public void setFormation(String promotion) {
+        this.formation = promotion;
     }
 
-    public String getAnneepromotion() {
-        return anneepromotion;
+    public String getAnneePromotion() {
+        return anneePromotion;
     }
 
-    public void setAnneepromotion(String anneepromotion) {
-        this.anneepromotion = anneepromotion;
+    public void setAnneePromotion(String anneepromotion) {
+        this.anneePromotion = anneepromotion;
     }
     
     

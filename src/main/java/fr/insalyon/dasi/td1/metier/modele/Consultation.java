@@ -45,6 +45,9 @@ public class Consultation implements Serializable {
 
     @ManyToOne
     private Medium medium;
+
+    @ManyToOne
+    private Employe employe;
     
     public Consultation(Date dateHeureDemande, String commentaire, Date dateHeureDebut, Date dateHeureFin, Client client, Medium medium) {
         this.dateHeureDemande = dateHeureDemande;
@@ -53,6 +56,14 @@ public class Consultation implements Serializable {
         this.dateHeureFin = dateHeureFin;
         this.client = client;
         this.medium = medium;
+    }
+
+    public Employe getEmploye() {
+        return employe;
+    }
+
+    public void setEmploye(Employe employe) {
+        this.employe = employe;
     }
 
     public Medium getMedium() {
