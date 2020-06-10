@@ -301,6 +301,7 @@ public class Service {
         ConsultationDao consultationDao = new ConsultationDao();
         ClientDao clientDao = new ClientDao();
         MediumDao mediumDao = new MediumDao();
+        EmployeDao employeDao = new EmployeDao();
 
 
         Consultation consultation = null;
@@ -328,6 +329,7 @@ public class Service {
             if (employe != null) {
                 employe.addConsultation(consultation);
                 employe.setEstDisponible(false);
+                employeDao.update(employe);
             } else {
                 // error message no employe found
             }
@@ -384,6 +386,7 @@ public class Service {
     public boolean terminerConsultation(Consultation consultation) {
         Date now = Calendar.getInstance().getTime();
         ConsultationDao consultationDao = new ConsultationDao();
+        EmployeDao employeDao = new EmployeDao();
 
         try {
             JpaUtil.creerContextePersistance();
@@ -396,6 +399,8 @@ public class Service {
                 Employe employe = consultation.getEmploye();
 
                 employe.setEstDisponible(true);
+
+                employeDao.update(employe);
 
                 consultationDao.update(consultation);
                 JpaUtil.validerTransaction();
