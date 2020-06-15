@@ -51,7 +51,7 @@ public class Main {
 
         Service s = new Service();
         s.initialisationSysteme();
-        
+
 
         //testerRechercheClient();
         //testerListeClient();

@@ -22,10 +22,10 @@ public class Astrologue extends Medium implements Serializable{
     public Astrologue() {
     }
 
-    public Astrologue(String formation, String anneepromotion, String denomination, String genre, String presentation) {
+    public Astrologue(String formation, String anneePromotion, String denomination, String genre, String presentation) {
         super(denomination, genre, presentation);
         this.formation = formation;
-        this.anneePromotion = anneepromotion;
+        this.anneePromotion = anneePromotion;
     }
 
     
