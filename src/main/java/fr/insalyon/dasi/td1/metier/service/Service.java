@@ -442,29 +442,29 @@ public class Service {
         List<Medium> mediums = null;
         Statistiques statistiques = new Statistiques();
         Integer nbConsults = 0;
-        HashMap<Long, Integer> nbConsultsParEmploye = new HashMap<Long, Integer>();
+        LinkedHashMap<Medium,Integer> nbConsultsParEmploye = new LinkedHashMap<Medium,Integer>();
 
         try {
             JpaUtil.creerContextePersistance();
             mediums = mediumDao.findAll();
             List<Consultation> consults;
 
-            for (Medium medium : mediums) {
-                consults = medium.getConsultations();
-                nbConsults = medium.getConsultations().size();
-                nbConsultsParEmploye.put(medium.getId(), nbConsults);
-                statistiques.setNbConsultationParEmploye(nbConsultsParEmploye);
+            for( Medium medium : mediums){
+                consults= medium.getConsultations();
+                nbConsults=medium.getConsultations().size();
+                nbConsultsParEmploye.put(medium, nbConsults);
             }
+            statistiques.setNbConsultationParEmploye(nbConsultsParEmploye);
 
             EmployeDao EmployeDao = new EmployeDao();
 
-            List<Employe> employes = EmployeDao.findAll();
-            HashMap<Long, Integer> repartitionParEmploye = new HashMap<Long, Integer>();
+            List <Employe> employes = EmployeDao.findAll();
+            LinkedHashMap<Employe,Integer> repartitionParEmploye = new LinkedHashMap<>();
 
             for (Employe employe : employes) {
 
-                repartitionParEmploye.put(employe.getId(), 0);
-                List<Consultation> consultations = employe.getConsultations();
+                repartitionParEmploye.put(employe, 0);
+                List <Consultation>  consultations = employe.getConsultations();
 
                 List<Long> listClient = new ArrayList<Long>();
 
@@ -474,11 +474,20 @@ public class Service {
                     }
                 }
 
-                repartitionParEmploye.put(employe.getId(), listClient.size());
+                repartitionParEmploye.put(employe, listClient.size());
             }
 
             statistiques.setClientsParEmploye(repartitionParEmploye);
 
+
+            Map<Medium, Integer> top5;
+            top5=mediumDao.getNombreConsultationParMedium(5);
+            
+            statistiques.setTop5Mediums((LinkedHashMap<Medium, Integer>) top5);
+           
+            
+            
+            
         } catch (Exception exception) {
             logger.severe("Error during authenticate " + exception);
         } finally {

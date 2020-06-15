@@ -6,6 +6,7 @@
 package fr.insalyon.dasi.td1.metier.modele;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,38 +17,39 @@ import java.util.Map;
 public class Statistiques {
     
     
-    private HashMap<Long,Integer> nbConsultationParEmploye;
+    private LinkedHashMap<Medium,Integer> nbConsultationParEmploye;
     
-    private HashMap<Long,Integer> clientsParEmploye;
+    private LinkedHashMap<Employe,Integer> clientsParEmploye;
     
-    private List<Long> top5Mediums;
+    private LinkedHashMap<Medium,Integer> top5Mediums;
 
     public Statistiques() {
     }
 
-    public HashMap<Long, Integer> getNbConsultationParEmploye() {
+    public LinkedHashMap<Medium, Integer> getNbConsultationParEmploye() {
         return nbConsultationParEmploye;
     }
 
-    public void setNbConsultationParEmploye(HashMap<Long, Integer> nbConsultationParEmploye) {
+    public void setNbConsultationParEmploye(LinkedHashMap<Medium, Integer> nbConsultationParEmploye) {
         this.nbConsultationParEmploye = nbConsultationParEmploye;
     }
 
-    public HashMap<Long, Integer> getClientsParEmploye() {
+    public LinkedHashMap<Employe, Integer> getClientsParEmploye() {
         return clientsParEmploye;
     }
 
-    public void setClientsParEmploye(HashMap<Long, Integer> clientsParEmploye) {
+    public void setClientsParEmploye(LinkedHashMap<Employe, Integer> clientsParEmploye) {
         this.clientsParEmploye = clientsParEmploye;
     }
 
-    public List<Long> getTop5Mediums() {
+    public LinkedHashMap<Medium, Integer> getTop5Mediums() {
         return top5Mediums;
     }
 
-    public void setTop5Mediums(List<Long> top5Mediums) {
+    public void setTop5Mediums(LinkedHashMap<Medium, Integer> top5Mediums) {
         this.top5Mediums = top5Mediums;
     }
+
     
-   
+
 }

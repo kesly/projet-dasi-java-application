@@ -293,12 +293,18 @@ public class Main {
         
         
         System.out.println("Nombres de Consults par medium\n");
-        for(Long idMedium: statistique.getNbConsultationParEmploye().keySet()){
-            nomMedium=service.findMediumById(idMedium).getDenomination();
-            System.out.println("Le médium "+ nomMedium + " a réalisé " + statistique.getNbConsultationParEmploye().get(idMedium)+ " consultations\n" );
+        for(Medium medium: statistique.getNbConsultationParEmploye().keySet()){
+            nomMedium=medium.getDenomination();
+            System.out.println("Le médium "+ nomMedium + " a réalisé " + statistique.getNbConsultationParEmploye().get(medium)+ " consultations\n" );
         }
 
+        System.out.println("Répartition du nombre de client par employé: \n");
+        for(Employe employe: statistique.getClientsParEmploye().keySet()){
+            String nomEmploye = employe.getPrenom() + employe.getNom();
+            System.out.println("Le médium "+ nomMedium + " a eu des conversations avec " + statistique.getNbConsultationParEmploye().get(employe)+ " clients\n" );
+        }
 
+        System.out.println("top5 médiums: " + statistique.getTop5Mediums().toString());
         System.out.println("###########################################");
 
         
