@@ -44,7 +44,7 @@ public class Main {
 //        testerAuthentificationClient();
 //        testerObtenirPredictions();
 //        testerCreationMedium();
-//        testerDemandeConsultation();
+        testerDemandeConsultation();
 //        testerDemarrerConsultation();
 //        testerTerminerConsultation();
 //        testerConsulterHistorique();
@@ -129,13 +129,15 @@ public class Main {
         // recuperer client
 
         Service service = new Service();
-        Client client = service.findClientById(1L);
+        Client client = service.findAllClient().get(0);
 
 //        System.out.println("test" + client.toString() );
 
 //        client.toString();
 
-        Medium medium = service.findMediumById(7L);
+        Medium medium = service.findAllMedium().get(0);
+        
+        
 
         Consultation c1 = service.demandeConsultation(client, medium);
         Consultation c2 = service.demandeConsultation(client, medium);
