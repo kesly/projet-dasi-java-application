@@ -39,6 +39,7 @@ public class Main {
        
         JpaUtil.init();
 
+        testerInitialisation();
         testerInscriptionClient();
 //        testerAuthentificationClient();
 //        testerObtenirPredictions();
@@ -49,9 +50,7 @@ public class Main {
 //        testerConsulterHistorique();
 //        testerAfficherStatistiques();
 
-        Service s = new Service();
-        s.initialisationSysteme();
-
+        
 
         //testerRechercheClient();
         //testerListeClient();
@@ -63,7 +62,11 @@ public class Main {
         JpaUtil.destroy();
     }
 
-
+    public static void testerInitialisation(){
+        Service s = new Service();
+        s.initialisationSysteme();    
+    }
+    
     public static void testerInscriptionClient() throws IOException, ParseException {
 
 
