@@ -267,20 +267,20 @@ public class Service {
 
     }
 
-    public Employe findGoodEmploye(String genre) {
+    private Employe findGoodEmploye(String genre) {
 
         EmployeDao employeDao = new EmployeDao();
 
         List<Employe> employeList = null;
         Employe goodEmploye = null;
         try {
-            JpaUtil.creerContextePersistance();
 
             employeList = employeDao.findAll();
 
             for (Employe employe : employeList) {
                 if (employe.getGenre().equals(genre) && employe.isEstDisponible()) {
                     goodEmploye = employe;
+                    break;
                 }
             }
 
@@ -289,7 +289,6 @@ public class Service {
         } catch (Exception exception) {
             Logger.getAnonymousLogger().log(Level.SEVERE, "Erreur: impossible de trouver un employe" + genre);
         } finally {
-            JpaUtil.fermerContextePersistance();
         }
 
         return goodEmploye;
@@ -341,7 +340,7 @@ public class Service {
             Logger.getAnonymousLogger().log(Level.INFO, "Succès: consultation créée" + consultation.toString());
 
         } catch (Exception exception) {
-            Logger.getAnonymousLogger().log(Level.SEVERE, "Erreur: impossible de faire la demande de consultation ayant l'id" + client.toString());
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Erreur: impossible de faire la demande de consultation ayant l'id" + client.toString()+exception.toString());
         } finally {
             JpaUtil.fermerContextePersistance();
         }

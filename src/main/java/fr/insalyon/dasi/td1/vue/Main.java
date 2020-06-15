@@ -41,14 +41,14 @@ public class Main {
 
         testerInitialisation();
         testerInscriptionClient();
-//        testerAuthentificationClient();
-//        testerObtenirPredictions();
-//        testerCreationMedium();
+        testerAuthentificationClient();
+        testerObtenirPredictions();
+        testerCreationMedium();
         testerDemandeConsultation();
 //        testerDemarrerConsultation();
 //        testerTerminerConsultation();
 //        testerConsulterHistorique();
-//        testerAfficherStatistiques();
+        testerAfficherStatistiques();
 
         
 
@@ -104,8 +104,8 @@ public class Main {
         Service service = new Service();
         List<String> predictions;
 
-        Client client1 = service.findClientById(1L);
-        Client client2 = service.findClientById(5L);
+        Client client1 = service.findAllClient().get(0);
+        Client client2 = service.findAllClient().get(1);
 
         predictions = service.obtenirPredictions(client1, 3, 3, 1);
         System.out.println("");
@@ -127,26 +127,15 @@ public class Main {
     public static void testerDemandeConsultation() {
 
         // recuperer client
-
         Service service = new Service();
         Client client = service.findAllClient().get(0);
-
-//        System.out.println("test" + client.toString() );
-
-//        client.toString();
-
         Medium medium = service.findAllMedium().get(0);
         
         
-
         Consultation c1 = service.demandeConsultation(client, medium);
         Consultation c2 = service.demandeConsultation(client, medium);
 
         System.out.println("consultation créé" + c1.toString() );
-
-
-        // ajouter consultation
-
     }
 
 
