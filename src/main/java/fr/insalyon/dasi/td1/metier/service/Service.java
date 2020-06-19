@@ -528,9 +528,14 @@ public class Service {
                 mediumDao.create(medium);
             }
 
-            employeList.add(new Employe("employe1@astroif.fr", "jean", "camille", "12345", "0667234565", "F", true));
-            employeList.add(new Employe("employe2@astroif.fr", "pierre", "dupont", "12345", "0667234565", "H", true));
-            employeList.add(new Employe("employe3@astroif.fr", "du jardin", "simone", "12345", "0667234565", "F", true));
+            employeList.add(new Employe("camille.berger@astroif.fr", "Berger", "Camille", "12345", "0667234565", "F", true));
+            employeList.add(new Employe("pierreDupont@astroif.fr", "Dupont", "Pierre", "12345", "0665136497", "H", true));
+            employeList.add(new Employe("simone.du-jardin@astroif.fr", "Du jardin", "Simone", "12345", "0614455669", "F", true));
+            employeList.add(new Employe("brice.martin@astroif.fr", "Martin", "Brice", "motdepasse", "0614455669", "H", true));
+            employeList.add(new Employe("alin.bouvier@astroif.fr", "Bouvier", "Alain", "12345", "0614455669", "H", true));
+            employeList.add(new Employe("herve.libercier@astroif.fr", "Libercier", "herve", "12345", "0614455669", "H", true));
+            employeList.add(new Employe("beatrice.moureau@astroif.fr", "Moureau", "Beatrice", "12345", "0614455669", "F", true));
+            
 
             for (Employe employe : employeList) {
                 employeDao.create(employe);
