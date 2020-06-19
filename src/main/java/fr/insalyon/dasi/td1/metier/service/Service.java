@@ -315,7 +315,6 @@ public class Service {
             consultation.setDateHeureDemande(new Date());
             consultation.setDateHeureDebut(null);
             consultation.setDateHeureFin(null);
-            consultation.setCommentaire("test");
 
             consultationDao.create(consultation);
 

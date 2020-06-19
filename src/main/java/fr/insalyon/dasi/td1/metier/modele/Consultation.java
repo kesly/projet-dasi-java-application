@@ -29,15 +29,15 @@ public class Consultation implements Serializable {
     public Consultation() {
     }
 
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateHeureDemande;
 
     private String commentaire;
 
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateHeureDebut;
 
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateHeureFin;
 
     @ManyToOne

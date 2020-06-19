@@ -40,15 +40,15 @@ public class Main {
         JpaUtil.init();
 
         testerInitialisation();
-        testerInscriptionClient();
-        testerAuthentificationClient();
-        testerObtenirPredictions();
-        testerCreationMedium();
-        testerDemandeConsultation();
+        //testerInscriptionClient();
+        //testerAuthentificationClient();
+        //testerObtenirPredictions();
+        //testerCreationMedium();
+        //testerDemandeConsultation();
 //        testerDemarrerConsultation();
 //        testerTerminerConsultation();
 //        testerConsulterHistorique();
-        testerAfficherStatistiques();
+       // testerAfficherStatistiques();
 
         
 
