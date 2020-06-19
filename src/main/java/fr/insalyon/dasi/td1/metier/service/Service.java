@@ -187,8 +187,7 @@ public class Service {
         List<Consultation> consultations = null;
 
         try {
-            JpaUtil.creerContextePersistance();
-
+            JpaUtil.creerContextePersistance();   
             consultations = consultationDao.findAllByClientId(client.getId());
         } catch (Exception exception) {
             Logger.getAnonymousLogger().log(Level.SEVERE, "Error during findAllConsultationByClient " + exception);

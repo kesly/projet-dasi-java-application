@@ -29,10 +29,11 @@ public class ConsultationDao {
     }
     
     public List<Consultation> findAllByClientId(Long id){
-        String s = "SELECT con FROM Client c JOIN c.consultations con WHERE c.id =:id";
+        String s = "SELECT con FROM Consultation con WHERE con.client.id = :id";
         Query query = JpaUtil.obtenirContextePersistance().createQuery(s);
         query.setParameter("id", id);
-        return (List<Consultation>)query.getResultList();
+        List<Consultation> consultations = (List<Consultation>)query.getResultList();
+        return consultations;
     }
     
     public List<Consultation> findAll(){

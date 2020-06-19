@@ -82,6 +82,19 @@ public class Client implements Serializable {
         this.consultations = new ArrayList<Consultation>();
     }
 
+    public Client(String nom, String prenom, Date dateNaissance, String adressePostal, String tel, String civilite, String mail, String motDePasse) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateNaissance = dateNaissance;
+        this.adressePostal = adressePostal;
+        this.tel = tel;
+        this.civilite = civilite;
+        this.mail = mail;
+        this.motDePasse = motDePasse;
+    }
+    
+    
+
     public String getNom()
     {
         return this.nom;
